@@ -24,7 +24,13 @@ const Login = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto shadow-2xl rounded-lg p-6 mt-10">
 
-            <h1 className="font-bold text-center text-2xl">Create Account</h1>
+            <h1 className="font-bold text-center text-2xl">Login to your account</h1>
+
+            <Input
+                label="Username"
+                error={errors["username"]?.message}
+                register={register("username", { required: "Username is required" })}
+            />
 
             <Input
                 label="Email"
@@ -40,7 +46,8 @@ const Login = () => {
             />
 
 
-            <Button className="mt-4 w-full" type="submit" >Login</Button>
+
+            <Button className="mt-4 w-full" type="submit">Create Account</Button>
 
 
             <Divider className="my-6" text="OR" />
@@ -48,8 +55,9 @@ const Login = () => {
             <SocialLogin  />
 
             <div className="text-sm font-medium mt-4 text-center">
-                Not have an account? <span className="hover:text-primary"><Link href="/auth/registration">Create account</Link></span>
+                Already have an account? <span className="hover:text-primary"><Link href="/auth/login">Login</Link></span>
             </div>
+
 
 
         </form>
