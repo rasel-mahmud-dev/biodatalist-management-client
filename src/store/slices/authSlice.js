@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {fetchCurrentAuthAction, loginAction} from "../actions/authAction";
+import {fetchCurrentAuthAction, loginOrRegistrationAction} from "../actions/authAction";
+import {ACTION_TYPES} from "../actionTypes";
 
 const initialState = {
     auth: null,
@@ -13,9 +14,17 @@ export const authSlice = createSlice({
         updateAccessToken(state, action) {
             state.accessToken = action.payload;
         },
+
+        // logout user action
+        logoutAction(state, action) {
+            state.auth = null
+            state.authLoaded = true
+        }
+
+
     },
     extraReducers: (builder)=>{
-        builder.addCase(loginAction.fulfilled, (state, action) => {
+        builder.addCase(loginOrRegistrationAction.fulfilled, (state, action) => {
             if(action.payload){
                 let {username, email, role, avatar, token} = action.payload
                state.auth = {
@@ -28,7 +37,7 @@ export const authSlice = createSlice({
         })
 
         // handle rejection error
-        builder.addCase(loginAction.rejected, (state, action) => {
+        builder.addCase(loginOrRegistrationAction.rejected, (state, action) => {
             state.auth = null
             state.authLoaded = true
         })
@@ -47,5 +56,7 @@ export const authSlice = createSlice({
     }
 });
 
+// Action creators are generated for each case reducer function
+export const { logoutAction } = authSlice.actions
 
 export default authSlice.reducer

@@ -67,3 +67,19 @@ ul {
   padding-left: 16px;
   padding-right: 16px
 }
+
+
+.popup{
+  transition: all .4s ease;
+  &--close{
+    transform: translateY(30px);
+    visibility: hidden;
+    opacity: 0;
+  }
+  &--open{
+    transform: translateY(0px);
+    visibility: visible;
+    opacity: 1;
+
+  }
+}

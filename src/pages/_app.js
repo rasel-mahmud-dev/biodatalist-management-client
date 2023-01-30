@@ -6,24 +6,28 @@ import {store} from "../store";
 import {useEffect} from "react";
 import {fetchCurrentAuthAction} from "../store/actions/authAction";
 
-export default function App({ Component, pageProps }) {
 
-    const dispatch = useDispatch()
+function App({Component, pageProps}) {
+    return (
+        <Provider store={store}>
+            <AppWrapper>
+                <Navigation/>
+                <Component {...pageProps} />;
+            </AppWrapper>
+        </Provider>
+    )
+}
 
 
-    useEffect(()=>{
+function AppWrapper(props) {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
         dispatch(fetchCurrentAuthAction())
     }, [])
 
 
-    return (
-
-
-        <div>
-            <Provider store={store}>
-                <Navigation />
-                <Component {...pageProps} />;
-            </Provider>
-        </div>
-    )
+    return props.children
 }
+
+export default App

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useForm } from "react-hook-form";
 import Input from "components/Input";
 import Button from "components/Button";
 import Divider from "components/Divider";
 import SocialLogin from "components/SocialLogin";
 import Link from "next/link";
-import {loginAction} from "../../store/actions/authAction";
+import { loginOrRegistrationAction} from "../../store/actions/authAction";
 import {useDispatch} from "react-redux";
+import ErrorMessage from "components/ErrorMessage";
 
 const Login = () => {
+
+    let [responseErrorMsg, setResponseErrorMsg] = useState("")
+
 
     const dispatch  = useDispatch()
 
@@ -20,10 +24,22 @@ const Login = () => {
 
 
     const onSubmit = (data) => {
-        dispatch(loginAction({
-            email: data.email,
-            password: data.password,
-        }))
+
+        //clear old error message
+        setResponseErrorMsg("")
+
+
+        dispatch(loginOrRegistrationAction({
+            type: "login",
+            data: {
+                email: data.email.trim(),
+                password: data.password.trim(),
+            }
+        })).unwrap().catch(ex=>{
+            if(ex && typeof ex === "string"){
+                setResponseErrorMsg(ex)
+            }
+        })
     }
 
 
@@ -32,6 +48,9 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto shadow-2xl rounded-lg p-6 mt-10">
 
             <h1 className="font-bold text-center text-2xl">Create Account</h1>
+
+            <ErrorMessage message={responseErrorMsg} />
+
 
             <Input
                 label="Email"

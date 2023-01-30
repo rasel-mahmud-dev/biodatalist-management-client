@@ -37,8 +37,8 @@ apis.interceptors.response.use(function (config) {
 
 // axios interceptors
 apis.interceptors.request.use(function (config) {
-    const token = window.localStorage.getItem("token")
-    console.log(token)
+    config.headers["authorization"] = window.localStorage.getItem("token")
+
     return config;
 }, function (error) {
     // Do something with request error
