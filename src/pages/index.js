@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
-import {useGetAllBioQuery} from "../store/services/bioData";
+
 import {useSelector} from "react-redux";
 
 export default function Home() {

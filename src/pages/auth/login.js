@@ -5,8 +5,12 @@ import Button from "components/Button";
 import Divider from "components/Divider";
 import SocialLogin from "components/SocialLogin";
 import Link from "next/link";
+import {loginAction} from "../../store/actions/authAction";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
+
+    const dispatch  = useDispatch()
 
     const {
         register,
@@ -16,7 +20,10 @@ const Login = () => {
 
 
     const onSubmit = (data) => {
-
+        dispatch(loginAction({
+            email: data.email,
+            password: data.password,
+        }))
     }
 
 
