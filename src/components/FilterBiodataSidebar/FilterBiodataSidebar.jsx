@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import Sidebar from "components/Sidebar";
-import Link from "next/link";
-import Avatar from "components/Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleSidebar} from "../../store/slices/appSlice";
 import Button from "components/Button";
 import {useForm} from "react-hook-form";
-import {loginOrRegistrationAction} from "../../store/actions/authAction";
 import Input from "components/Input";
 
-const FilterBiodataSidebar = ({isOpen}) => {
+const FilterBiodataSidebar = ({onSearchBioData, isOpen}) => {
 
-    const {auth, biodata} = useSelector(state => state.authState)
+    const {auth} = useSelector(state => state.authState)
+
+    const filterType  = ["Filters", "Biodata No"]
+    const [activeTab, setActiveTab] = useState(0)
 
     const dispatch  = useDispatch()
 
@@ -23,15 +23,9 @@ const FilterBiodataSidebar = ({isOpen}) => {
 
 
     const onSubmit = (data) => {
-
-
-
+        onSearchBioData(data)
     }
 
-
-    const filterType  = ["Filters", "Biodata No"]
-
-    const [activeTab, setActiveTab] = useState(0)
 
 
     function renderFilterByNoForm(){

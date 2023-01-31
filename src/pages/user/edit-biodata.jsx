@@ -20,7 +20,7 @@ import {updateBiodataAction} from "../../store/actions/biodataAction";
 
 const EditBiodata = () => {
 
-    const [activeStep, setActiveStep] = useState(1)
+    const [activeStep, setActiveStep] = useState(0)
 
     const authState = useSelector(state => state.authState)
     const dispatch = useDispatch()
