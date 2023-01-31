@@ -2,15 +2,18 @@ import React from 'react';
 import Sidebar from "components/Sidebar";
 import Link from "next/link";
 import Avatar from "components/Avatar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleSidebar} from "../../store/slices/appSlice";
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({isOpen}) => {
 
     const {auth, biodata} = useSelector(state => state.authState)
 
     function handleLogout() {
         alert("asd")
     }
+
+    const dispatch = useDispatch()
 
     const sidebarItems = [
         {label: "Dashboard", icon: "/icons/dashborad-ico.svg", href: "/user/dashboard"},
@@ -26,7 +29,7 @@ const DashboardSidebar = () => {
 
     return (
         <div>
-            <Sidebar className="">
+            <Sidebar onClose={()=>dispatch(toggleSidebar())} isOpen={isOpen} >
 
                 {auth && (<div className="flex flex-col justify-center items-center py-10">
                     <Avatar className="w-24 h-24" imgClass="w-24 h-24 text-3xl" src={auth.avatar} username={auth.username}/>

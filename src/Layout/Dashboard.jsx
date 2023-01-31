@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import DashboardSidebar from "components/Dashboard/Sidebar";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchAuthBiodataAction} from "../store/actions/biodataAction";
 
 const DashboardLayout = ({containerClass="", children}) => {
 
     const dispatch = useDispatch()
+
+    const appState = useSelector(state=>state.appState)
 
     useEffect(()=>{
         dispatch(fetchAuthBiodataAction())
@@ -14,7 +16,7 @@ const DashboardLayout = ({containerClass="", children}) => {
 
     return (
         <div className="flex">
-            <DashboardSidebar/>
+            <DashboardSidebar isOpen={appState.isOpenSidebar}/>
             <div className={`container ${containerClass}`}>
                 {children}
             </div>

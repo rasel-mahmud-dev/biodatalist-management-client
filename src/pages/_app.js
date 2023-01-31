@@ -16,7 +16,6 @@ function App({Component, pageProps}) {
                 <Navigation/>
                 <div className="navigation-height"></div>
                 <Component {...pageProps} />;
-
                 <Footer />
             </AppWrapper>
         </Provider>

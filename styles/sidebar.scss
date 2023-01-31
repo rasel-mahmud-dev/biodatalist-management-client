@@ -1,5 +1,6 @@
-.sidebar{
+@import "styles/--mixin";
 
+.sidebar{
   width: 300px;
   height: 100vh;
   box-shadow: 10px 0 13px -7px #dbdbdb;
@@ -16,6 +17,31 @@
         filter: hue-rotate(276deg);
       }
     }
+  }
+
+  margin-left: -300px;
+  transition: margin-left .4s ease;
+
+  @include getUp(1000px){
+    margin-left: 0;
+  }
+
+  @include getDown(1000px){
+    position: fixed;
+    left: -20px;
+    background: white;
+    z-index: 1000;
+  }
+
+  &-open{
+    margin-left: 0;
+  }
+}
+
+.sidebar-backdrop{
+  background: rgba(47, 47, 47, 0.26);
+  @include getUp(1000px){
+    display: none;
   }
 }
 

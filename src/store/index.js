@@ -3,11 +3,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { bioData } from './services/bioData'
 import authReducer from "./slices/authSlice";
+import appReducer from "./slices/appSlice";
 
 
 export const store = configureStore({
     reducer: {
         authState: authReducer,
+        appState: appReducer,
         // Add the generated reducer as a specific top-level slice
         [bioData.reducerPath]: bioData.reducer,
 

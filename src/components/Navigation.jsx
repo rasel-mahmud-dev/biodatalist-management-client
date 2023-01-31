@@ -7,6 +7,8 @@ import Popup from "components/Popup";
 import {MdDashboard} from "react-icons/md";
 import {FaSignOutAlt} from "react-icons/fa";
 import {logoutAction} from "../store/slices/authSlice";
+import {HiBars4} from "react-icons/hi2";
+import {toggleSidebar} from "../store/slices/appSlice";
 
 const Navigation = () => {
     const {auth} = useSelector(state => state.authState)
@@ -28,10 +30,16 @@ const Navigation = () => {
         {label: "Contact", href: "/"},
     ]
 
+
+    function handleToggleSidebar(e){
+        dispatch(toggleSidebar())
+    }
+
     return (
         <div className="bg-white shadow-xl fixed top-0 left-0 z-30 w-full">
             <header className="flex justify-between container mx-auto items-center">
-                <div>
+                <div className="flex items-center justify-between gap-x-2">
+                    <HiBars4 className="text-2xl cursor-pointer block lg:hidden" onClick={handleToggleSidebar}/>
                     <img className="w-14" src="/icons/bio.png" alt=""/>
                 </div>
                 <nav>

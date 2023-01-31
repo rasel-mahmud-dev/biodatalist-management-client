@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FaAngleLeft, FaAngleRight, FaTimes} from "react-icons/fa";
-
+import Backdrop from "components/Backdrop";
 
 
 const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
@@ -57,7 +57,7 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
 
     function handleChange(value,) {
         setValue((prevState) => {
-        let updateState = {...prevState}
+            let updateState = {...prevState}
             if (currentStep === 1) {
                 updateState["country"] = value
             } else if (currentStep === 2) {
@@ -71,7 +71,8 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
             register.onChange({target: {name: name, value: updateState}})
 
             // fetch data for next step
-            handleFetchData(currentStep + 1, ()=>{}, updateState)
+            handleFetchData(currentStep + 1, () => {
+            }, updateState)
 
             // set selected data
             return updateState;
@@ -88,7 +89,7 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
         })
     }
 
-    function handleFetchData(currentStep, next, updateState){
+    function handleFetchData(currentStep, next, updateState) {
         let dataName = currentStep === 1
             ? "countries"
             : currentStep === 2
@@ -101,49 +102,47 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
         let updateOptions = {...options}
 
         // you should cache data here for avoid duplication network request
-        fetch(`/bd-${dataName}.json`).then(res=>res.json()).then(data=>{
-            if(data){
+        fetch(`/bd-${dataName}.json`).then(res => res.json()).then(data => {
+            if (data) {
                 let filtred = []
-                if(currentStep === 1){
+                if (currentStep === 1) {
                     filtred = data
-                }
-                else if(currentStep === 2){
+                } else if (currentStep === 2) {
                     /// list of divisions
-                    if(updateState.country.name === "Bangladesh"){ // if country name is selected bangladesh then store all divisions
+                    if (updateState.country.name === "Bangladesh") { // if country name is selected bangladesh then store all divisions
                         filtred = data
                     }
 
-                } else if(currentStep === 3){
+                } else if (currentStep === 3) {
                     // list of districts
                     // if  previous step value select correctly
-                    if(updateState.division.id) {
+                    if (updateState.division.id) {
                         filtred = data.filter(item => item.division_id === updateState.division.id)
                     }
-                } else if(currentStep === 4){
+                } else if (currentStep === 4) {
                     // list of upzila
                     // if previous step value select correctly
-                    if(updateState.district.id) {
+                    if (updateState.district.id) {
                         filtred = data.filter(item => item.district_id === updateState.district.id)
                     }
 
                 }
-            updateOptions[currentStep] = filtred
-            setOptions(updateOptions)
-            next && next()
+                updateOptions[currentStep] = filtred
+                setOptions(updateOptions)
+                next && next()
             }
-        }).catch(ex=>{
+        }).catch(ex => {
             // handle error
         })
     }
 
-
-    function printSelectedValue(){
+    function printSelectedValue() {
         let str = ""
         for (const valueKey in value) {
-            if(value[valueKey] && value[valueKey].name){
-                str += " => "+ value[valueKey].name
+            if (value[valueKey] && value[valueKey].name) {
+                str += " => " + value[valueKey].name
             }
-         }
+        }
 
         return !str ? defaultOption.name : str.slice(3)
     }
@@ -165,7 +164,6 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
                             <FaTimes className="text-sm" onClick={toggleExpandOption}/>}
                     </div>
 
-
                     <div className="mt-5 options-list">
                         {options[currentStep]?.map((item, i) => (
                             <li onClick={() => handleChange(item)} key={i}
@@ -177,6 +175,7 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
                     </div>
                 </div>
             )}
+
 
             {error && <div className="text-red-400 text-xs font-medium mt-1">{error}</div>}
         </div>
