@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {fetchCurrentAuthAction, loginOrRegistrationAction} from "../actions/authAction";
-import {ACTION_TYPES} from "../actionTypes";
+import {fetchAuthBiodataAction} from "../actions/biodataAction";
+
 
 const initialState = {
     auth: null,
-    authLoaded: false
+    authLoaded: false,
+    biodata: null
 };
 
 export const authSlice = createSlice({
@@ -20,8 +22,6 @@ export const authSlice = createSlice({
             state.auth = null
             state.authLoaded = true
         }
-
-
     },
     extraReducers: (builder)=>{
         builder.addCase(loginOrRegistrationAction.fulfilled, (state, action) => {
@@ -51,6 +51,14 @@ export const authSlice = createSlice({
                     username, email, role, avatar
                 }
                 state.authLoaded = true
+            }
+        })
+
+
+        // handle fetch current user bio data
+        builder.addCase(fetchAuthBiodataAction.fulfilled, (state, action) => {
+            if(action.payload){
+                state.biodata = action.payload
             }
         })
     }

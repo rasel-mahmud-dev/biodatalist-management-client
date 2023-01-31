@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Input = ({label, type="text", className="", register, error, ...attr}) => {
+
     return (
         <div className={`input-group ${error ? 'input-error': ''}`}>
             <label htmlFor="">{label}</label>

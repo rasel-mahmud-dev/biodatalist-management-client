@@ -1,141 +1,105 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DashboardLayout from "../../Layout/Dashboard";
 import Input from "components/Input";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import Select from "components/Select";
 import Button from "components/Button";
+import biodataOptions from "../../data/biodataOptions";
+import {updateBiodataAction} from "../../store/actions/biodataAction";
+import StepBiodataSection from "components/StepBiodataSection";
+import {addressInput, generalInfoInput} from "components/Dashboard/EditBioDataStepFields";
+
+
 
 const EditBiodata = () => {
 
-    const [activeStep, setActiveStep] = useState(0)
+    const [activeStep, setActiveStep] = useState(1)
 
-    // store bio state step number as key and fields as object
-    // like this {0: {biodataType: "value", ...}}
-    const [bioData, setBiodata] = useState({
-
-    })
-
-
-    const steps = [
-        "General Info",
-        "Address",
-        "Educational Qualifications",
-        "Family Information",
-        "Personal Information",
-        "Occupational information",
-        "Marriage related information",
-        "Expected Life Partner",
-        "Pledge",
-        "Contact",
-    ]
-
-
-    const dispatch = useDispatch()
+    const authState = useSelector(state => state.authState)
 
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors}, reset
     } = useForm();
 
 
-    function generalInfoInput(errors) {
-        const fields = [
-            {
-                label: "Biodata Type *",
-                options: [{value: "male-biodata", label: "Male Biodata"}, {
-                    value: "female-biodata",
-                    label: "Female Biodata"
-                }],
-                name: "biodataType",
-                registerOptions: {
-                    required: "Biodata Type is required"
-                }
-            },
-            {
-                label: "Marital Status *",
-                name: "maritalStatus",
-                options: [
-                    {value: "Never Married", label: "Never Married"},
-                    {value: "Married", label: "Married"},
-                    {value: "Divorced", label: "Divorced"},
-                    {value: "Window", label: "Window"},
-                ],
-                registerOptions: {
-                    required: "maritalStatus is required"
-                }
-            },
-            {
-                label: "Birth Year *",
-                type: "date",
-                name: "birthDay ",
-                registerOptions: {
-                    required: "Password is required",
-                    minLength: {value: 3, message: "Password should be greater than 3 character"}
-                }
-            },
-            {
-                label: "Height",
-                options: [{value: "less than 4", label: "less than 4"}, {value: "4", label: "4feet"}],
-                name: "height",
-                registerOptions: {
-                    required: "height is required"
-                }
-            },
-            {
-                label: "Blood Group",
-                options: [{value: "A+", label: "A+"}, {value: "A-", label: "A-"}, {
-                    value: "O+",
-                    label: "O+"
-                }, {value: "O-", label: "O-"}],
-                name: "bloodGroup",
-                registerOptions: {
-                    required: "bloodGroup is required"
-                }
-            },
-            {
-                label: "Nationality",
-                options: [{value: "Bangladeshi", label: "Bangladeshi"}],
-                name: "nationality",
-                registerOptions: {
-                    required: "Nationality is required"
-                }
-            },
-        ]
 
-        return (
-            <div>
-                {
-                    fields.map(field => (
-                        field.options ? (
-                            <Select error={errors[field.name]?.message} label={field.label}
-                                    register={register(field.name, field.registerOptions)}>
-                                <option value="">Select</option>
-                                {field.options.map(opt => (
-                                    <option value={opt.value}>{opt.label}</option>
-                                ))}
-                            </Select>
-                        ) : (
-                            <Input
-                                error={errors[field.name]?.message}
-                                type={field.type}
-                                label={field.label}
-                                register={register(field.name, field.registerOptions)}
-                            />
-                        )
-                    ))
-                }
-            </div>
-        )
+
+    // store bio state step number as key and fields as object
+    // like this {0: {biodataType: "value", ...}}
+    const [stepBioData, setStepBiodata] = useState({})
+
+
+    // grouping bio data for multi step
+    const steps = {
+        "General Info": ["biodataType", "maritalStatus", "birthDay", "height", "bloodGroup", "nationality"],
+        "Address": [],
+        "Educational Qualifications": [],
+        "Family Information": [],
+        "Personal Information": [],
+        "Occupational information": [],
+        "Marriage related information": [],
+        "Expected Life Partner": [],
+        "Pledge": [],
+        "Contact": [],
     }
 
+    useEffect(() => {
+        if (authState.biodata) {
+
+            let updateBiodataDefault = {}
+
+            Object.keys(steps).forEach((key, index) => {
+                let stepNames = steps[key]
+                updateBiodataDefault[index] = {}
+                stepNames.forEach(name => {
+                    updateBiodataDefault[index] = {
+                        ...updateBiodataDefault[index],
+                        [name]: authState.biodata[name]
+                    }
+                })
+            })
+
+            let trimEmptyObject = {}
+            for (const updateBiodataDefaultKey in updateBiodataDefault) {
+                if (Object.keys(updateBiodataDefault[updateBiodataDefaultKey]).length > 0) {
+                    trimEmptyObject[updateBiodataDefaultKey] = updateBiodataDefault[updateBiodataDefaultKey]
+                }
+            }
+
+            // grouping form data
+            setStepBiodata(trimEmptyObject)
+
+            // update form default for async operation
+            reset(authState.biodata)
+        }
+    }, [authState.biodata])
+
+
+    const dispatch = useDispatch()
+
+
     function onSubmit(data) {
-        setBiodata(prevState => ({
+        setStepBiodata(prevState => ({
             ...prevState,
             [activeStep]: data
         }))
-        setActiveStep(prevState => prevState + 1)
+
+
+        dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
+            setActiveStep(prevState => prevState + 1)
+        })
+    }
+
+    function handleChangeStep(stepIndex){
+        setActiveStep(stepIndex)
+    }
+
+    const stepRenderForm = {
+        0: generalInfoInput,
+        1: addressInput,
     }
 
 
@@ -146,21 +110,14 @@ const EditBiodata = () => {
             <div className="max-w-3xl mx-auto ">
 
                 <div className="flex justify-center gap-x-10">
-                    <ul>
-                        {steps.map((step, index) => (
-                            <li className={`biodata-step-li ${activeStep === index ? "active" : ""}`}>
-                                <h5 className="w-60 text-end mr-10">{step}</h5>
-                                <div className="biodata-step-number">
-                                    <h3>{index + 1}</h3>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+
+                    <StepBiodataSection onChangeStep={handleChangeStep} activeStep={activeStep} steps={steps} completedSteps={Object.keys(stepBioData)} />
+
                     <div className="w-full">
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <h2 className="font-medium text-xl  border-b border-primary/40">General Info</h2>
+
                             <div className="mt-6">
-                                {generalInfoInput(errors)}
+                                {stepRenderForm[activeStep] && stepRenderForm[activeStep](errors, stepBioData, register)}
                             </div>
 
 

@@ -1,35 +1,54 @@
 
-.biodata-step-li{
-  @apply relative flex items-center justify-center py-4;
-    &:before{
-      content: "";
-      height: 100%;
-      display: block;
-      width: 1px;
-      position: absolute;
-      background: rgba(44, 101, 236, 0.3);
-      right: 0;
-      z-index: -9;
-      transform: translateX(-14px);
-      top: -50%;
-    }
-  h5{
-    @apply text-gray-400;
-  }
-  &.active{
-    .biodata-step-number{
-      @apply bg-primary text-white;
-    }
-    h5{
-      @apply text-primary;
-    }
+.biodata-step-li {
+    @apply relative flex items-center justify-center py-4;
     &:before {
-      content: none;
+        content: "";
+        height: 100%;
+        display: block;
+        width: 1px;
+        position: absolute;
+        background: rgba(44, 101, 236, 0.3);
+        right: 0;
+        z-index: -9;
+        transform: translateX(-14px);
+        top: -50%;
     }
-  }
-  .biodata-step-number{
-    @apply  rounded-full flex items-center justify-center border bg-white border-primary/20;
-    width: 30px;
-    height: 30px;
-  }
+
+    &:nth-child(1) {
+        &:before {
+            content: none;
+        }
+    }
+
+    h5 {
+        @apply text-gray-400;
+    }
+
+    &.active {
+        .biodata-step-number {
+            @apply bg-primary text-white;
+        }
+
+        h5 {
+            @apply text-primary;
+        }
+
+    }
+
+    &.completed {
+        @apply cursor-pointer;
+        .biodata-step-number {
+            @apply bg-primary text-white
+        }
+
+        h5 {
+            @apply text-primary;
+        }
+    }
+
+    .biodata-step-number {
+        @apply rounded-full text-xs flex items-center justify-center border bg-white border-primary/20;
+        width: 30px;
+        height: 30px;
+    }
 }
