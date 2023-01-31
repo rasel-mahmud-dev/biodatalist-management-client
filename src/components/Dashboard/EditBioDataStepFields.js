@@ -2,6 +2,7 @@ import biodataOptions from "../../data/biodataOptions";
 import Select from "components/Select";
 import Input from "components/Input";
 import React from "react";
+import MultiStepSelect from "components/MultiStepSelect";
 
 
 // render for general bio data
@@ -114,26 +115,16 @@ export function addressInput(errors, stepBioData, register) {
     return (
         <div>
             <h2 className="font-medium text-xl  border-b border-primary/40">Address</h2>
+
             {
                 fields.map(field => (
-                    field.options ? (
-                        <Select error={errors[field.name]?.message} label={field.label}
-                                defaultValue={stepBioData[0]?.[field.name]}
-                                register={register(field.name, field.registerOptions)}>
-                            <option value="">Select</option>
-                            {field.options.map(opt => (
-                                <option value={opt.value}>{opt.label}</option>
-                            ))}
-                        </Select>
-                    ) : (
-                        <Input
-                            defaultValue={stepBioData[0]?.[field.name]}
-                            error={errors[field.name]?.message}
-                            type={field.type}
-                            label={field.label}
-                            register={register(field.name, field.registerOptions)}
-                        />
-                    )
+                    <MultiStepSelect
+                        defaultOption={{name: "Select Present Address", value: ""}}
+                        name={field.name}
+                        error={errors[field.name]?.message}
+                        label={field.label}
+                        register={register(field.name, field.registerOptions)}
+                    />
                 ))
             }
         </div>

@@ -82,15 +82,15 @@ const EditBiodata = () => {
 
 
     function onSubmit(data) {
-        setStepBiodata(prevState => ({
-            ...prevState,
-            [activeStep]: data
-        }))
+        // setStepBiodata(prevState => ({
+        //     ...prevState,
+        //     [activeStep]: data
+        // }))
 
-
-        dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
-            setActiveStep(prevState => prevState + 1)
-        })
+        console.log(data)
+        // dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
+        //     setActiveStep(prevState => prevState + 1)
+        // })
     }
 
     function handleChangeStep(stepIndex){
