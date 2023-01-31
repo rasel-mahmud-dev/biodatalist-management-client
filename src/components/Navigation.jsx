@@ -9,51 +9,63 @@ import {FaSignOutAlt} from "react-icons/fa";
 import {logoutAction} from "../store/slices/authSlice";
 
 const Navigation = () => {
-    const {auth} = useSelector(state=>state.authState)
+    const {auth} = useSelector(state => state.authState)
 
     const dispatch = useDispatch()
 
     const [openAuthPopup, setOpenAuthPopup] = useState(false)
 
 
-    function handleLogout(){
+    function handleLogout() {
         dispatch(logoutAction())
     }
+
+    const navItems = [
+        {label: "Home", href: "/"},
+        {label: "About us", href: "/"},
+        {label: "Ask", href: "/"},
+        {label: "Direction", href: "/"},
+        {label: "Contact", href: "/"},
+    ]
 
     return (
         <div className="bg-white shadow-xl">
             <header className="flex justify-between container mx-auto items-center">
                 <div>
                     <img className="w-14" src="/icons/bio.png" alt=""/>
-                    
                 </div>
+                <nav>
+                    <ul className="flex items-center gap-x-6 py-4">
+                        {navItems.map(item=>(
+                            <li>
+                                <Link href={item.href}>{item.label}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
                 <nav>
                     <ul className="flex items-center gap-x-4 py-4">
                         <li>
-                            <Link href="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link href="/about">About</Link>
-                        </li>
-                        <li>
                             {auth ? (
-                                <div onClick={()=>setOpenAuthPopup(!openAuthPopup)}
-                                     onMouseLeave={()=>setOpenAuthPopup(false)}
-                                     onMouseEnter={()=>setOpenAuthPopup(true)}
+                                <div onClick={() => setOpenAuthPopup(!openAuthPopup)}
+                                     onMouseLeave={() => setOpenAuthPopup(false)}
+                                     onMouseEnter={() => setOpenAuthPopup(true)}
                                      className="relative">
-                                    <Avatar username={auth.username} src={auth.avatar} />
+                                    <Avatar username={auth.username} src={auth.avatar}/>
                                     <Popup isOpen={openAuthPopup} className="right-0 shadow-xl">
                                         <ul>
                                             <li className="flex items-center gap-x-2">
-                                                <Avatar username={auth.username} className="h-8 w-8" imgClass="w-8 h-8" src={auth.avatar} />
+                                                <Avatar username={auth.username} className="h-8 w-8" imgClass="w-8 h-8"
+                                                        src={auth.avatar}/>
                                                 <h4>{auth.username}</h4>
                                             </li>
                                             <li className="flex items-center gap-x-2 mt-4 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
-                                                <MdDashboard />
+                                                <MdDashboard/>
                                                 <Link href="/dashboard">Dashboard</Link>
                                             </li>
-                                            <li onClick={handleLogout} className="flex items-center gap-x-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
-                                                <FaSignOutAlt />
+                                            <li onClick={handleLogout}
+                                                className="flex items-center gap-x-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
+                                                <FaSignOutAlt/>
                                                 <span className="">Logout</span>
                                             </li>
                                         </ul>
@@ -62,7 +74,7 @@ const Navigation = () => {
                                 </div>
                             ) : (
 
-                            <Button className="" variant="outline"><Link href="/auth/login">Login</Link></Button>
+                                <Button className="" variant="outline"><Link href="/auth/login">Login</Link></Button>
                             )}
                         </li>
                     </ul>
@@ -71,8 +83,6 @@ const Navigation = () => {
         </div>
     );
 };
-
-
 
 
 export default Navigation;
