@@ -7,11 +7,16 @@ const Biodata = () => {
     const appState  = useSelector(state=>state.appState)
 
     return (
-        <div>
+        <div className="flex">
 
             <FilterBiodataSidebar isOpen={appState.isOpenSidebar} />
+            <div className="w-full">
+                <div className="container">
+                <div className="route-title">Filter Biodata</div>
+            </div>
 
-           sdklfjsdklfjsdklfj
+            </div>
+
         </div>
     );
 };

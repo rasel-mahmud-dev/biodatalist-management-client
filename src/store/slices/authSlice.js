@@ -21,6 +21,7 @@ export const authSlice = createSlice({
         logoutAction(state, action) {
             state.auth = null
             state.authLoaded = true
+            localStorage.removeItem("token")
         }
     },
     extraReducers: (builder)=>{
