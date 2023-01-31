@@ -1,20 +1,15 @@
 import React from 'react';
-import DashboardSidebar from "components/Dashboard/Sidebar";
+import DashboardLayout from "../../Layout/Dashboard";
 
 const Dashboard = () => {
     return (
 
-        <div className="flex">
-            <DashboardSidebar/>
-            <div>
-                <div className="container">
-                    <h1 className="section-title">
-                        dashboard
-                    </h1>
-                </div>
-            </div>
+            <DashboardLayout>
+                <h1>Dashboard Home</h1>
 
-        </div>
+            </DashboardLayout>
+
+
     );
 };
 

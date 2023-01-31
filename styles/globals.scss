@@ -6,8 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -36,50 +35,73 @@ ul {
   list-style: none;
 }
 
-:root{
-  --header-height: 80px
+:root {
+  --header-height: 80px;
 }
 
 
-.input-error{
-  .input{
+/**** Input component global classes ***************/
+.input-group {
+  @apply flex flex-col mt-3;
+  label{
+    color: #737373;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 2px;
+
+  }
+  .input {
+    font-size: 14px;
+    @apply border focus:border-primary border-neutral-600/20 outline-none rounded-md py-1.5 px-3 text-gray-700 transition transition-colors
+  }
+}
+
+.input-error {
+  .input {
     @apply border border-red-400
   }
-  label{
+
+  label {
     @apply text-red-500
   }
 }
 
-.input{
-  @apply border focus:border-primary border-neutral-600/20 outline-none rounded-md py-1.5 px-3 text-gray-700 transition transition-colors
-}
 
-.btn{
+/**** Button component global classes ***************/
+.btn {
   @apply bg-primary outline-none border-none text-white py-2 px-4 rounded-md ;
   box-sizing: border-box;
 
-  &-outline{
+  &-outline {
     border: 2px solid;
     @apply bg-transparent border-primary text-primary hover:bg-primary hover:text-white;
   }
 
 }
-.container{
+
+.container {
   max-width: 1290px;
   margin: auto;
   padding-left: 16px;
   padding-right: 16px
 }
 
+.container-full {
+  max-width: inherit;
+  width: 100%;
+  margin: 0;
+}
 
-.popup{
+.popup {
   transition: all .4s ease;
-  &--close{
+
+  &--close {
     transform: translateY(30px);
     visibility: hidden;
     opacity: 0;
   }
-  &--open{
+
+  &--open {
     transform: translateY(0px);
     visibility: visible;
     opacity: 1;
@@ -87,12 +109,14 @@ ul {
   }
 }
 
-.banner{
+/**** Banner component global classes ***************/
+.banner {
   background: linear-gradient(136deg, #7b29ff, #140662);
   height: 700px;
   width: 100%;
   padding: 100px;
-  .banner-filter-form{
+
+  .banner-filter-form {
     bottom: -90%;
     position: relative;
     width: 800px;
@@ -101,24 +125,24 @@ ul {
 }
 
 
-.section-title{
+.section-title {
   @apply text-5xl font-bold text-gray-900
 }
 
-.card{
+.card {
   @apply shadow p-5 rounded-md bg-white shadow-xxs hover:shadow-xs transition transition-shadow
 }
 
-.navigation-height{
+.navigation-height {
   height: var(--header-height);
 }
 
-.social-link-item{
+.social-link-item {
   transition: all .5s ease;
   @apply text-xl p-3 flex justify-center items-center border border-gray-300/40 hover:bg-white rounded-full;
-  &:hover{
-    svg{
-    fill: #0070f3;
+  &:hover {
+    svg {
+      fill: #0070f3;
 
     }
   }

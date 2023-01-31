@@ -1,13 +1,13 @@
 // `pages/_app.js`
 import '../../styles/globals.scss';
 import '../../styles/sidebar.scss';
+import '../../styles/dashboard.scss';
 import Navigation from "components/Navigation";
 import {Provider, useDispatch} from "react-redux";
 import {store} from "../store";
 import {useEffect} from "react";
 import {fetchCurrentAuthAction} from "../store/actions/authAction";
 import Footer from "components/Footer";
-
 
 function App({Component, pageProps}) {
     return (

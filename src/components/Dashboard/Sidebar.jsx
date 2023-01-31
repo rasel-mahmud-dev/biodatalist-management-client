@@ -14,7 +14,7 @@ const DashboardSidebar = () => {
 
     const sidebarItems = [
         {label: "Dashboard", icon: "/icons/dashborad-ico.svg", href: "/user/dashboard"},
-        {label: "Edit Biodata", icon: "/icons/editbiodata-ico.svg", href: ""},
+        {label: "Edit Biodata", icon: "/icons/editbiodata-ico.svg", href: "/user/edit-biodata"},
         {label: "Short list", icon: "/icons/shortlist-ico.svg", href: ""},
         {label: "Ignore list", icon: "/icons/ignorelist-ico.svg", href: ""},
         {label: "My purchased", icon: "/icons/mypurchased-ico.svg", href: ""},

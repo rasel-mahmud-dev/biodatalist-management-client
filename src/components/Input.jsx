@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Input = ({label, className="", register, error, ...attr}) => {
+const Input = ({label, type="text", className="", register, error, ...attr}) => {
     return (
-        <div className={`flex flex-col mt-3 ${error ? 'input-error': ''}`}>
+        <div className={`input-group ${error ? 'input-error': ''}`}>
             <label htmlFor="">{label}</label>
-            <input className={`input ${className}`}  {...register} {...attr} />
-            {error && <div className="text-red-400 text-sm font-medium">{error}</div>}
+            <input className={`input ${className}`} type={type}  {...register} {...attr} />
+            {error && <div className="text-red-400 text-xs font-medium mt-1">{error}</div>}
         </div>
     );
 };
