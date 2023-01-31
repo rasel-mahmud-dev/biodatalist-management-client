@@ -16,6 +16,7 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
             <div className="shadow-lg rounded-xl bg-white p-5 my-20 ">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex items-center  w-full gap-x-10 pb-5">
                     <Select label="I'm looking for" register={register("gender")} >
+                        <option value="">All</option>
                         <option value="female">female</option>
                         <option value="male">male</option>
                         <option value="other">other</option>

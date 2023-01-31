@@ -1,5 +1,6 @@
 // `pages/_app.js`
 import '../../styles/globals.scss';
+import '../../styles/sidebar.scss';
 import Navigation from "components/Navigation";
 import {Provider, useDispatch} from "react-redux";
 import {store} from "../store";

@@ -1,0 +1,21 @@
+.sidebar{
+
+  width: 300px;
+  height: 100vh;
+  box-shadow: 10px 0 13px -7px #dbdbdb;
+  background: white;
+
+  &-item{
+    @apply flex items-center gap-x-2 py-2 my-2 hover:bg-gray-100 px-4 text-sm font-medium hover:text-primary;
+    img{
+      transition: filter .29s ease 0s;
+      filter: grayscale(100%)
+    }
+    &:hover{
+      img{
+        filter: hue-rotate(276deg);
+      }
+    }
+  }
+}
+

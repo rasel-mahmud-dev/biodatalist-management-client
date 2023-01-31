@@ -25,7 +25,7 @@ export default function Home() {
                 <UserStatistics/>
             </section>
 
-            <section className="container">
+            <section className="container pb-20">
                 <Services/>
             </section>
 
