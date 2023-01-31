@@ -24,6 +24,7 @@ const Navigation = () => {
 
     const navItems = [
         {label: "Home", href: "/"},
+        {label: "Biodata", href: "/biodata"},
         {label: "About us", href: "/"},
         {label: "Ask", href: "/"},
         {label: "Direction", href: "/"},
@@ -45,7 +46,7 @@ const Navigation = () => {
                 <nav>
                     <ul className="flex items-center gap-x-6 py-4">
                         {navItems.map(item=>(
-                            <li key={item.label}>
+                            <li key={item.label} className="text-sm font-medium ">
                                 <Link href={item.href}>{item.label}</Link>
                             </li>
                         ))}
