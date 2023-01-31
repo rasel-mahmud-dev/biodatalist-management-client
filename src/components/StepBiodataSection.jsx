@@ -14,14 +14,13 @@ const StepBiodataSection = ({steps, onChangeStep, activeStep, completedSteps}) =
                 onChangeStep(stepIndex)
             }
         }
-
     }
 
     return (
         <div>
             <ul>
                 {Object.keys(steps).map((stepLabel, index) => (
-                    <li onClick={() => handleJumpNextStep(index) }
+                    <li key={index} onClick={() => handleJumpNextStep(index) }
                         className={`biodata-step-li ${activeStep === index ? "active" : ""} ${completedSteps.includes(index.toString()) ? "completed" : ""}`}>
                         <h5 className="w-60 text-end mr-10">{stepLabel}</h5>
                         <div className="biodata-step-number">

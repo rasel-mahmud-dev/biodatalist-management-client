@@ -29,9 +29,17 @@ const biodataOptions = {
         {value: "O-", label: "O-"}
     ],
 
-    nationality: [{value: "Bangladeshi", label: "Bangladeshi"}]
+    nationality: [{value: "Bangladeshi", label: "Bangladeshi"}],
 
-
+    educationMethod: [{value: "General", label: "General"}, {value: "Alia", label: "Alia"}],
+    fatherAliveOptions: [{value: "Yes Alive", label: "Yes Alive"}, {value: "No Alive", label: "No Alive"}],
+    occupations: [
+        {value: "Student", label: "Student"},
+        {value: "Gov.Job", label: "Gov.Job"},
+        {value: "Private.Job", label: "Private.Job"},
+        {value: "UnEmployee", label: "UnEmployee"},
+        {value: "Business", label: "Business"},
+    ]
 }
 
 export default biodataOptions

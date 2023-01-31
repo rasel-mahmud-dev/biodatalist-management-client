@@ -45,7 +45,7 @@ const Navigation = () => {
                 <nav>
                     <ul className="flex items-center gap-x-6 py-4">
                         {navItems.map(item=>(
-                            <li>
+                            <li key={item.label}>
                                 <Link href={item.href}>{item.label}</Link>
                             </li>
                         ))}

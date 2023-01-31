@@ -1,17 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FaAngleLeft, FaAngleRight, FaTimes} from "react-icons/fa";
-import Backdrop from "components/Backdrop";
 
-
-const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
+const MultiStepSelect = ({error, label, name, defaultValue, defaultOption, register}) => {
 
     const [value, setValue] = useState({
         country: "",
         division: "",
         district: "",
         upazila: "",
-
     })
+
+
+    useEffect(()=>{
+        if(!defaultValue) return;
+
+        let updateValues = {...value}
+        for (let valueKey in value) {
+            if(defaultValue[valueKey]){
+                updateValues[valueKey] = defaultValue[valueKey]
+            }
+        }
+
+        setValue(updateValues)
+
+    }, [defaultValue])
+
+
 
     /** OptionsTypes
      * { [key: stepNumber]: Option[] }
@@ -55,6 +69,27 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
         setCurrentStep(prev)
     }
 
+    function getValue(updateState){
+        let result = {}
+        if (updateState.country && updateState.country.name) {
+            result["country"] = updateState.country.name
+        }
+        if (updateState.division && updateState.division.name) {
+            result["division"] = updateState.division.name
+        }
+        if (updateState.division && updateState.division.name) {
+            result["division"] = updateState.division.name
+        }
+        if (updateState.district && updateState.district.name) {
+            result["district"] = updateState.district.name
+        }
+        if (updateState.upazila && updateState.upazila.name) {
+            result["upazila"] = updateState.upazila.name
+        }
+
+        return result
+    }
+
     function handleChange(value,) {
         setValue((prevState) => {
             let updateState = {...prevState}
@@ -68,7 +103,7 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
                 updateState["upazila"] = value
             }
             // send update state back where this component used
-            register.onChange({target: {name: name, value: updateState}})
+            register.onChange({target: {name: name, value: getValue(updateState)}})
 
             // fetch data for next step
             handleFetchData(currentStep + 1, () => {
@@ -136,15 +171,37 @@ const MultiStepSelect = ({error, label, name, defaultOption, register}) => {
         })
     }
 
+
+    // print all address as input
     function printSelectedValue() {
         let str = ""
         for (const valueKey in value) {
-            if (value[valueKey] && value[valueKey].name) {
-                str += " => " + value[valueKey].name
+            // if we have default value
+            if(defaultValue){
+
+                // if we have default value and also change currently by user
+                if(value[valueKey] && value[valueKey].name){
+                    if (value[valueKey] && value[valueKey].name) {
+                        str += " => " + value[valueKey].name
+                    }
+
+                } else {
+                    // string all addresses concatenate
+                    if (value[valueKey]) {
+                        str += " => " + value[valueKey]
+                    }
+                }
+
+            } else{
+                // string all addresses concatenate
+                if (value[valueKey] && value[valueKey].name) {
+                    str += " => " + value[valueKey].name
+                }
             }
         }
 
-        return !str ? defaultOption.name : str.slice(3)
+        // is input are chosent than show new addresses or print default option name as placeholder
+        return !str ? defaultOption?.name : str.slice(3)
     }
 
     return (

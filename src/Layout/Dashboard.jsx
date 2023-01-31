@@ -17,8 +17,10 @@ const DashboardLayout = ({containerClass="", children}) => {
     return (
         <div className="flex">
             <DashboardSidebar isOpen={appState.isOpenSidebar}/>
-            <div className={`container ${containerClass}`}>
-                {children}
+            <div className="w-full">
+                <div className={`container ${containerClass}`}>
+                    {children}
+                </div>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Avatar from "components/Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleSidebar} from "../../store/slices/appSlice";
+import Button from "components/Button";
 
 const DashboardSidebar = ({isOpen}) => {
 
@@ -35,14 +36,17 @@ const DashboardSidebar = ({isOpen}) => {
                     <Avatar className="w-24 h-24" imgClass="w-24 h-24 text-3xl" src={auth.avatar} username={auth.username}/>
                     <h2>{auth.username}</h2>
 
-                    <h3 className="mt-2">Biodata Status</h3>
-                    <div className="bg-gray-200 py-2 px-4 rounded-md mt-1">{biodata ? "Completed" : "Incompleted"}</div>
+                    <h3 className="mt-2  font-medium text-gray-500">Biodata Status</h3>
+                    <div className="bg-gray-200 py-1 px-4 text-sm rounded-md mt-1">{biodata ? "Completed" : "Incompleted"}</div>
+
+                    <Link href="/user/mybio"><Button className="mt-4">My Bio Data</Button></Link>
+
                 </div>)}
 
 
                 <ul>
                     {sidebarItems.map(item => (
-                        <li>
+                        <li key={item.label}>
                             <Link href={item.href} onClick={item.onClick && item.onClick} className="sidebar-item">
                                 <img className="w-4" src={item.icon} alt=""/>
                                 <p>{item.label}</p>
