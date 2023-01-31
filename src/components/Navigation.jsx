@@ -29,7 +29,7 @@ const Navigation = () => {
     ]
 
     return (
-        <div className="bg-white shadow-xl">
+        <div className="bg-white shadow-xl fixed top-0 left-0 z-30 w-full">
             <header className="flex justify-between container mx-auto items-center">
                 <div>
                     <img className="w-14" src="/icons/bio.png" alt=""/>

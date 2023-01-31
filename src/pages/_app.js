@@ -12,6 +12,7 @@ function App({Component, pageProps}) {
         <Provider store={store}>
             <AppWrapper>
                 <Navigation/>
+                <div className="navigation-height"></div>
                 <Component {...pageProps} />;
             </AppWrapper>
         </Provider>

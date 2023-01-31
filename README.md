@@ -7,6 +7,7 @@
 ### Packages 
 - Nextjs
 - Redux-Toolkit + RTK query
+- React-hook-form
 - Tailwindcss 
 - Scss
 

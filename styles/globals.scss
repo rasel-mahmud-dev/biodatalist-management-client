@@ -36,6 +36,9 @@ ul {
   list-style: none;
 }
 
+:root{
+  --header-height: 80px
+}
 
 
 .input-error{
@@ -82,4 +85,30 @@ ul {
     opacity: 1;
 
   }
+}
+
+.banner{
+  background: linear-gradient(136deg, #7b29ff, #140662);
+  height: 700px;
+  width: 100%;
+  padding: 100px;
+  .banner-filter-form{
+    bottom: -90%;
+    position: relative;
+    width: 800px;
+    margin: auto;
+  }
+}
+
+
+.section-title{
+  @apply text-5xl font-bold text-gray-900
+}
+
+.card{
+  @apply shadow p-5 rounded-md bg-white shadow-xxs hover:shadow-xs transition transition-shadow
+}
+
+.navigation-height{
+  height: var(--header-height);
 }
