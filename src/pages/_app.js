@@ -5,6 +5,7 @@ import {Provider, useDispatch} from "react-redux";
 import {store} from "../store";
 import {useEffect} from "react";
 import {fetchCurrentAuthAction} from "../store/actions/authAction";
+import Footer from "components/Footer";
 
 
 function App({Component, pageProps}) {
@@ -14,6 +15,8 @@ function App({Component, pageProps}) {
                 <Navigation/>
                 <div className="navigation-height"></div>
                 <Component {...pageProps} />;
+
+                <Footer />
             </AppWrapper>
         </Provider>
     )

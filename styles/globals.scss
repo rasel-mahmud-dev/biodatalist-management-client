@@ -112,3 +112,14 @@ ul {
 .navigation-height{
   height: var(--header-height);
 }
+
+.social-link-item{
+  transition: all .5s ease;
+  @apply text-xl p-3 flex justify-center items-center border border-gray-300/40 hover:bg-white rounded-full;
+  &:hover{
+    svg{
+    fill: #0070f3;
+
+    }
+  }
+}
