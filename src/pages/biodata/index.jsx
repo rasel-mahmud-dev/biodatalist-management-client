@@ -86,6 +86,11 @@ const BiodataFilterPage = () => {
         dispatch(changeSort({field: "createdAt", order: Number(value) }))
     }
 
+    function handleChangePerPage(e){
+        let value =  e.target.value
+        dispatch(changePagination({perPage: Number(value) }))
+    }
+
 
     return (
         <div className="flex">
@@ -110,11 +115,20 @@ const BiodataFilterPage = () => {
 
 
                     {/**** sort input ********/}
-                    <div className="flex justify-end">
-                        <Select onChange={handleSortOrder}>
-                            <option value="1">New</option>
-                            <option value="-1">Old</option>
-                        </Select>
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <Select defaultValue={pagination.perPage} onChange={handleChangePerPage}>
+                                {new Array(10).fill(0).map((_, index)=> index > 0 && (
+                                    <option>{index * 5}</option>
+                                ))}
+                            </Select>
+                        </div>
+                        <div>
+                            <Select onChange={handleSortOrder}>
+                                <option value="1">New</option>
+                                <option value="-1">Old</option>
+                            </Select>
+                        </div>
                     </div>
 
 

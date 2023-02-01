@@ -8,7 +8,7 @@ const initialState = {
     filter: {},
     sort: {field: "createdAt", order: 1},
     pagination: {
-        perPage: 20,
+        perPage: 5,
         currentPage: 1
     }
 };
@@ -36,9 +36,16 @@ export const biodataSlice = createSlice({
 
         changeFilter: (state , action)=>{
             if(action.payload !== undefined){
-                state.filter = {
-                    ...state.filter,
-                    ...action.payload
+                // clear other filter is select biodataNo
+                if(action.payload.biodataNo){
+                    state.filter = {
+                        biodataNo: action.payload.biodataNo
+                    }
+                } else {
+                    state.filter = {
+                        ...state.filter,
+                        ...action.payload
+                    }
                 }
             }
         },

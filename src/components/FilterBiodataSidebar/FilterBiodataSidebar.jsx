@@ -34,9 +34,9 @@ const FilterBiodataSidebar = () => {
 
     const onSubmit = (data) => {
         dispatch(changeFilter({
-            ...data
+            ...data,
+            biodataNo: ""
         }))
-        console.log(data)
     }
 
     function handleClearFilterValue() {
@@ -73,6 +73,7 @@ const FilterBiodataSidebar = () => {
                             <div>
                                 <Select
                                     label="Biodata Type"
+                                    defaultValue={filter.biodataType}
                                     error={errors["biodataType"]?.message}
                                     option={biodataOptions.biodataType}
                                     register={register("biodataType")}
@@ -83,6 +84,7 @@ const FilterBiodataSidebar = () => {
                                     ))}
                                 </Select>
                                 <Select
+                                    defaultValue={filter.maritalStatus}
                                     label="Marriage Status"
                                     error={errors["maritalStatus"]?.message}
                                     option={biodataOptions.maritalStatus}
@@ -143,7 +145,7 @@ const FilterBiodataSidebar = () => {
                             <div>
                                 <Input
                                     label="Biodata No"
-                                    error={errors["biodataNo"]?.message}
+                                    defaultValue={filter.biodataNo}
                                     register={register("biodataNo")}
                                 />
 

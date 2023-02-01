@@ -1,12 +1,10 @@
 import Head from 'next/head';
-import {useSelector} from "react-redux";
 import UserStatistics from "components/HomePage/UserStatistics";
 import Banner from "components/HomePage/Banner";
 import Services from "components/HomePage/Services";
 
 export default function Home() {
 
-    const state = useSelector(state => state)
 
     return (
         <div className="">
