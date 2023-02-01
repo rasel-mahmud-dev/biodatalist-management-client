@@ -30,5 +30,3 @@ export const updateBiodataAction = createAsyncThunk("authSlice/updateBiodata", a
         return thunkAPI.rejectWithValue( ex.message)
     }
 })
-
-
