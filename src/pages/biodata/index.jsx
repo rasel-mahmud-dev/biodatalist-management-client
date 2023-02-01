@@ -4,14 +4,15 @@ import {useDispatch, useSelector} from "react-redux";
 import Biodata from "components/Biodata";
 import Backdrop from "components/Backdrop";
 import Loader from "components/Loader";
-import {bioDataApi, useGetFilterBioQuery, useUpdateFilterBioMutation} from "../../store/services/bioDataApi";
+import {bioDataApi, useGetFilterBioQuery} from "../../store/services/bioDataApi";
 import Pagination from "components/Pagination";
-import {changePagination} from "../../store/slices/biodataSlice";
+import {changePagination, changeSort} from "../../store/slices/biodataSlice";
+import Select from "components/Select";
 
 
 const BiodataFilterPage = () => {
 
-    const {filterBiodata, totalItems, filter, pagination} = useSelector(state => state.biodataState)
+    const {filterBiodata, totalItems, filter, sort, pagination} = useSelector(state => state.biodataState)
 
     let {isLoading, isFetching} = useGetFilterBioQuery({})
 
@@ -41,18 +42,32 @@ const BiodataFilterPage = () => {
         payload.pageNumber = pagination.currentPage
         payload.perPage = pagination.perPage
 
+        if(sort.field){
+            payload.sort = {
+                field: sort.field,
+                order: sort.order
+            }
+        }
+
         // trigger re-fetching with new filter payload
         trigger(payload)
 
     }, [
         filter.biodataNo,
         pagination.currentPage,
-        pagination.perPage
+        pagination.perPage,
+        sort.field,
+        sort.order
     ])
 
 
     function handlePageChange(pageNumber){
         dispatch(changePagination({pageNumber}))
+    }
+
+    function handleSortOrder(e){
+        let value =  e.target.value
+        dispatch(changeSort({field: "createdAt", order: Number(value) }))
     }
 
 
@@ -76,6 +91,15 @@ const BiodataFilterPage = () => {
                         Filter Biodata
                         <div className="ml-4">({totalItems})</div>
                     </div>
+
+
+                    <div className="flex justify-end">
+                        <Select onChange={handleSortOrder}>
+                            <option value="1">New</option>
+                            <option value="-1">Old</option>
+                        </Select>
+                    </div>
+
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
                         {filterBiodata && filterBiodata.map((biodata) => (

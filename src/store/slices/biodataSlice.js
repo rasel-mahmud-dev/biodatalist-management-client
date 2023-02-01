@@ -6,8 +6,9 @@ const initialState = {
     filterBiodata: [],
     totalItems: 0,
     filter: {},
+    sort: {field: "createdAt", order: 1},
     pagination: {
-        perPage: 2,
+        perPage: 20,
         currentPage: 1
     }
 };
@@ -22,6 +23,14 @@ export const biodataSlice = createSlice({
             }
             if(action.payload.perPage !== undefined){
                 state.pagination.perPage = action.payload.perPage
+            }
+        },
+        changeSort: (state , action)=>{
+            if(action.payload.field !== undefined){
+                state.sort.field = action.payload.field
+            }
+            if(action.payload.order !== undefined){
+                state.sort.order = action.payload.order
             }
         }
     },
@@ -39,6 +48,6 @@ export const biodataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { changePagination } = biodataSlice.actions
+export const { changePagination, changeSort } = biodataSlice.actions
 
 export default biodataSlice.reducer
