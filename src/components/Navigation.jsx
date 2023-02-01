@@ -70,7 +70,7 @@ const Navigation = () => {
                                             </li>
                                             <li className="flex items-center gap-x-2 mt-4 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
                                                 <MdDashboard/>
-                                                <Link href="/user/dashboard">Dashboard</Link>
+                                                <Link href={`/${auth.role === "ADMIN" ? "admin" : "user"}`}>Dashboard</Link>
                                             </li>
                                             <li onClick={handleLogout}
                                                 className="flex items-center gap-x-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">

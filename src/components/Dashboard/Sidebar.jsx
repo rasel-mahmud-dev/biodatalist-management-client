@@ -18,14 +18,17 @@ const DashboardSidebar = ({isOpen}) => {
     const dispatch = useDispatch()
 
     const sidebarItems = [
-        {label: "Dashboard", icon: "/icons/dashborad-ico.svg", href: "/user/dashboard"},
-        {label: "Edit Biodata", icon: "/icons/editbiodata-ico.svg", href: "/user/edit-biodata"},
-        {label: "Short list", icon: "/icons/shortlist-ico.svg", href: ""},
-        {label: "Ignore list", icon: "/icons/ignorelist-ico.svg", href: ""},
-        {label: "My purchased", icon: "/icons/mypurchased-ico.svg", href: ""},
-        {label: "Support & Report", icon: "/icons/support-ico.svg", href: ""},
-        {label: "Settings", icon: "/icons/settings-ico.svg", href: ""},
-        {label: "Log out", icon: "/icons/logout-ico.svg", href: "", onClick: handleLogout},
+        {label: "Dashboard", icon: "/icons/dashborad-ico.svg", href: "/admin", roles: ["ADMIN"]},
+        {label: "Dashboard", icon: "/icons/dashborad-ico.svg", href: "/user/dashboard", roles: ["CUSTOMER"]},
+        {label: "Edit Biodata", icon: "/icons/editbiodata-ico.svg", href: "/user/edit-biodata", roles: ["ADMIN", "CUSTOMER"]},
+        {label: "Short list", icon: "/icons/shortlist-ico.svg", href: "", roles: ["CUSTOMER"]},
+        {label: "Users list", icon: "/icons/shortlist-ico.svg", href: "/admin/users", roles: ["ADMIN"]},
+        {label: "All BioData", icon: "/icons/shortlist-ico.svg", href: "", roles: ["ADMIN"]},
+        {label: "Ignore list", icon: "/icons/ignorelist-ico.svg", href: "", roles: ["CUSTOMER"]},
+        {label: "My purchased", icon: "/icons/mypurchased-ico.svg", href: "", roles: ["CUSTOMER"]},
+        {label: "Support & Report", icon: "/icons/support-ico.svg", href: "", roles: ["CUSTOMER"]},
+        {label: "Settings", icon: "/icons/settings-ico.svg", href: "", roles: ["ADMIN", "CUSTOMER"]},
+        {label: "Log out", icon: "/icons/logout-ico.svg", href: "", onClick: handleLogout, roles: ["ADMIN", "CUSTOMER"]},
     ]
 
 
@@ -46,7 +49,7 @@ const DashboardSidebar = ({isOpen}) => {
 
 
                 <ul>
-                    {sidebarItems.map(item => (
+                    {sidebarItems.map(item => item.roles.includes(auth?.role) && (
                         <li key={item.label}>
                             <Link href={item.href} onClick={item.onClick && item.onClick} className="sidebar-item">
                                 <img className="w-4" src={item.icon} alt=""/>
