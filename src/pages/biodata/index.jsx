@@ -1,61 +1,57 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import FilterBiodataSidebar from "components/FilterBiodataSidebar/FilterBiodataSidebar";
-import {useSelector} from "react-redux";
-import apis from "../../apis";
+import { useSelector} from "react-redux";
 import Biodata from "components/Biodata";
+import Backdrop from "components/Backdrop";
+import Loader from "components/Loader";
+import {bioDataApi, useGetFilterBioQuery, useUpdateFilterBioMutation} from "../../store/services/bioDataApi";
+
 
 const BiodataFilterPage = () => {
 
-    const appState = useSelector(state => state.appState)
+    const {filterBiodata} = useSelector(state => state.biodataState)
 
-    let [data, setData] = useState([])
+    let {isLoading, isFetching} = useGetFilterBioQuery({})
 
-    useEffect(() => {
-
-        apis.post("/api/biodata/filter", {}).then((doc) => {
-            setData(doc.data)
-        }).catch(e => {
-            console.log(e)
-        })
-    }, [])
+    // lazy query // trigger when filter value changes
+    const [trigger] = bioDataApi.endpoints.getFilterBio.useLazyQuery({})
 
 
-    function handleSearchBioData(data){
+    async function handleSearchBioData(data) {
         let filter = {}
-        if(data.biodataNo){
+        if (data.biodataNo) {
             filter.biodataNo = data.biodataNo
         }
-
-        apis.post("/api/biodata/filter", filter).then((doc) => {
-            setData(doc.data)
-        }).catch(e => {
-            console.log(e)
-        })
+        // trigger re-fetching with new filter payload
+        trigger(filter)
     }
 
 
     return (
         <div className="flex">
 
-            <FilterBiodataSidebar onSearchBioData={handleSearchBioData} isOpen={appState.isOpenSidebar}/>
+            <FilterBiodataSidebar onSearchBioData={handleSearchBioData}/>
 
             <div className="w-full">
                 <div className="container">
+
+                    {(isLoading || isFetching) && <>
+                        {/**** backdrop overlay *****/}
+                        <div id="filter-overlay"></div>
+                        <Backdrop backdropRoot="filter-overlay" className="fetch-bio-overlay"/>
+                        <Loader/>
+                    </>}
+
+
                     <div className="route-title">Filter Biodata</div>
 
-
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                        {data && data.map((biodata) => (
+                        {filterBiodata && filterBiodata.map((biodata) => (
                             <Biodata biodata={biodata} key={biodata._id}/>
                         ))}
                     </div>
-
-
                 </div>
-
-
             </div>
-
         </div>
     );
 };

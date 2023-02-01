@@ -37,7 +37,7 @@ const Navigation = () => {
     }
 
     return (
-        <div className="bg-white shadow-xl fixed top-0 left-0 z-30 w-full">
+        <div className="bg-white shadow-xl fixed top-0 left-0 w-full navigation">
             <header className="flex justify-between container mx-auto items-center">
                 <div className="flex items-center justify-between gap-x-2">
                     <HiBars4 className="text-2xl cursor-pointer block lg:hidden" onClick={handleToggleSidebar}/>

@@ -13,10 +13,6 @@ export const authSlice = createSlice({
     name: 'authSlice',
     initialState,
     reducers: {
-        updateAccessToken(state, action) {
-            state.accessToken = action.payload;
-        },
-
         // logout user action
         logoutAction(state, action) {
             state.auth = null

@@ -1,48 +1,50 @@
 @import "styles/--mixin";
 
-.sidebar{
-  width: 300px;
-  height: calc(100vh - 280px);
-  box-shadow: 10px 0 13px -7px #dbdbdb;
-  background: white;
+.sidebar {
+    width: var(--sidebar-width);
+    height: calc(100vh - 280px);
+    box-shadow: 10px 0 13px -7px #dbdbdb;
+    background: #faf9fb;
+    position: relative;
+    z-index: 100;
+    &-item {
+        @apply flex items-center gap-x-2 py-2 my-2 hover:bg-gray-100 px-4 text-sm font-medium hover:text-primary;
+        img {
+            transition: filter .29s ease 0s;
+            filter: grayscale(100%)
+        }
 
-  &-item{
-    @apply flex items-center gap-x-2 py-2 my-2 hover:bg-gray-100 px-4 text-sm font-medium hover:text-primary;
-    img{
-      transition: filter .29s ease 0s;
-      filter: grayscale(100%)
+        &:hover {
+            img {
+                filter: hue-rotate(276deg);
+            }
+        }
     }
-    &:hover{
-      img{
-        filter: hue-rotate(276deg);
-      }
+
+    margin-left: -300px;
+    transition: margin-left .4s ease;
+
+    @include getUp(1000px) {
+        margin-left: 0;
     }
-  }
 
-  margin-left: -300px;
-  transition: margin-left .4s ease;
+    @include getDown(1000px) {
+        position: fixed;
+        left: -20px;
+        background: white;
+        z-index: 1000;
+    }
 
-  @include getUp(1000px){
-    margin-left: 0;
-  }
-
-  @include getDown(1000px){
-    position: fixed;
-    left: -20px;
-    background: white;
-    z-index: 1000;
-  }
-
-  &-open{
-    margin-left: 0;
-    left: 0px;
-  }
+    &-open {
+        margin-left: 0;
+        left: 0px;
+    }
 }
 
-.sidebar-backdrop{
-  background: rgba(47, 47, 47, 0.26);
-  @include getUp(1000px){
-    display: none;
-  }
+.sidebar-backdrop {
+    background: rgba(47, 47, 47, 0.26);
+    @include getUp(1000px) {
+        display: none;
+    }
 }
 

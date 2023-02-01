@@ -1,16 +1,12 @@
-export const backend = "http://localhost:2000"
 
 import axios from "axios";
 
 
-// export const backend = "https://localhost"
+export const backend = "http://localhost:2000"
 
 
 const apis = axios.create({
     baseURL: backend,
-    // headers: {
-    //     authorization: token
-    // }
 })
 
 
@@ -21,8 +17,8 @@ apis.interceptors.response.use(function (config) {
 }, function (error) {
     // Do something with request error
 
+    // rearrange error message
     let message = error.message;
-
     if(error.response?.data){
         if(error.response.data.message){
             message = error.response.data.message
