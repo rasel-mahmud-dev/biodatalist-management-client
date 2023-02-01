@@ -5,10 +5,14 @@ import {toggleSidebar} from "../../store/slices/appSlice";
 import Button from "components/Button";
 import {useForm} from "react-hook-form";
 import Input from "components/Input";
+import {changeFilter, clearFilter} from "../../store/slices/biodataSlice";
 
-const FilterBiodataSidebar = ({onSearchBioData}) => {
+const FilterBiodataSidebar = () => {
 
-    const {isOpenSidebar} = useSelector(state => state.appState)
+    const {
+        appState: {isOpenSidebar},
+        biodataState: {filter}
+    } = useSelector(state => state)
 
     const filterType  = ["Filters", "Biodata No"]
     const [activeTab, setActiveTab] = useState(1)
@@ -18,12 +22,20 @@ const FilterBiodataSidebar = ({onSearchBioData}) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors }
     } = useForm();
 
 
     const onSubmit = (data) => {
-        onSearchBioData(data)
+        dispatch(changeFilter({
+            ...data
+        }))
+    }
+
+    function handleClearFilterValue(){
+        reset()
+        dispatch(clearFilter())
     }
 
 
@@ -61,6 +73,9 @@ const FilterBiodataSidebar = ({onSearchBioData}) => {
                            </div>
                        ))}
                    </div>
+
+                   {/**** clear all filter ****/}
+                   <Button onClick={handleClearFilterValue} className="mt-4 block ml-auto">Clear Filter</Button>
 
                    <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
 

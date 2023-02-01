@@ -32,6 +32,18 @@ export const biodataSlice = createSlice({
             if(action.payload.order !== undefined){
                 state.sort.order = action.payload.order
             }
+        },
+
+        changeFilter: (state , action)=>{
+            if(action.payload !== undefined){
+                state.filter = {
+                    ...state.filter,
+                    ...action.payload
+                }
+            }
+        },
+        clearFilter: (state )=>{
+            state.filter = {}
         }
     },
     extraReducers: (builder) => {
@@ -48,6 +60,6 @@ export const biodataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { changePagination, changeSort } = biodataSlice.actions
+export const { changePagination, changeSort, changeFilter, clearFilter } = biodataSlice.actions
 
 export default biodataSlice.reducer
