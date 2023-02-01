@@ -1,17 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../Layout/Dashboard";
 
-const Dashboard = () => {
+const Index = () => {
     return (
-
         <DashboardLayout>
 
-            <h1 className="route-title">Dashboard</h1>
-
+            <h1 className="route-title">Admin Dashboard</h1>
+            
         </DashboardLayout>
-
-
     );
 };
 
-export default Dashboard;
+export default Index;

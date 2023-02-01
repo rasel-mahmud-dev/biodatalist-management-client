@@ -5,13 +5,14 @@ import Avatar from "components/Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleSidebar} from "../../store/slices/appSlice";
 import Button from "components/Button";
+import {logoutAction} from "../../store/slices/authSlice";
 
 const DashboardSidebar = ({isOpen}) => {
 
     const {auth, biodata} = useSelector(state => state.authState)
 
     function handleLogout() {
-        alert("asd")
+        dispatch(logoutAction())
     }
 
     const dispatch = useDispatch()

@@ -56,9 +56,9 @@ const Login = () => {
 
             <ErrorMessage message={responseErrorMsg} />
 
-
             <Input
                 label="Email"
+                type="email"
                 error={errors["email"]?.message}
                 register={register("email", { required: "Email is required" })}
             />
