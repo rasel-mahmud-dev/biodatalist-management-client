@@ -82,7 +82,8 @@ export function generalInfoInput(errors, stepBioData, register) {
 
 
 // render for Address bio data
-export function addressInput(errors, stepBioData, register) {
+export function addressInput(errors, stepBioData, register, isShowLabel= false, isDisableValidation = false) {
+
 
     const STEP_NO = 1
 
@@ -91,7 +92,7 @@ export function addressInput(errors, stepBioData, register) {
             label: "Permanent Address",
             options: biodataOptions.biodataType,
             name: "permanentAddress",
-            registerOptions: {
+            registerOptions: isDisableValidation && {
                 required: "Permanent Address is required"
             }
         },
@@ -99,7 +100,7 @@ export function addressInput(errors, stepBioData, register) {
             label: "Present Address",
             options: biodataOptions.biodataType,
             name: "presentAddress",
-            registerOptions: {
+            registerOptions: isDisableValidation && {
                 required: "Present Address is required"
             }
         }
@@ -108,7 +109,7 @@ export function addressInput(errors, stepBioData, register) {
 
     return (
         <div>
-            <h2 className="font-semibold text-xl pb-1 mb-4 border-b border-primary/40">Address</h2>
+            {isShowLabel && <h2 className="font-semibold text-xl pb-1 mb-4 border-b border-primary/40">Address</h2> }
             {
                 fields.map(field => (
                     <MultiStepSelect

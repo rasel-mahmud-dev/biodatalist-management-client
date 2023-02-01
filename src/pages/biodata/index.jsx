@@ -39,6 +39,18 @@ const BiodataFilterPage = () => {
         if (filter.biodataNo) {
             payload.biodataNo = filter.biodataNo
         }
+        if(filter.biodataType){
+            payload.biodataType = filter.biodataType
+        }
+        if(filter.maritalStatus){
+            payload.maritalStatus = filter.maritalStatus
+        }
+        if(filter.permanentAddress){
+            payload.permanentAddress = filter.permanentAddress
+        }
+        if(filter.presentAddress){
+            payload.presentAddress = filter.presentAddress
+        }
         payload.pageNumber = pagination.currentPage
         payload.perPage = pagination.perPage
 
@@ -57,7 +69,11 @@ const BiodataFilterPage = () => {
         pagination.currentPage,
         pagination.perPage,
         sort.field,
-        sort.order
+        sort.order,
+        filter.biodataType,
+        filter.maritalStatus,
+        filter.permanentAddress,
+        filter.presentAddress,
     ])
 
 

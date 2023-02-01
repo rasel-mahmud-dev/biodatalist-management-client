@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FaAngleLeft, FaAngleRight, FaTimes} from "react-icons/fa";
 
-const MultiStepSelect = ({error, label, name, defaultValue, defaultOption, register}) => {
+const MultiStepSelect = ({error, label, value: a, name, defaultValue, defaultOption, register}) => {
 
     const [value, setValue] = useState({
         country: "",
