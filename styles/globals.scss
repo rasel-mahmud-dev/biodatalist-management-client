@@ -304,3 +304,14 @@ ul {
 .paginate-active{
     @apply bg-primary font-semibold text-white
 }
+
+.accordion{
+    .accordion-item{
+        &.open-accordion{
+            display: block;
+        }
+        &.close-accordion{
+            display: none;
+        }
+    }
+}
