@@ -8,22 +8,17 @@ export const bioDataApi = createApi({
     baseQuery: axiosBaseQuery(),
     reducerPath: 'bioDataApi',
 
-    tagTypes: ['Biodatas'],
+    tagTypes: ["allBiodata"],
 
     endpoints: (builder) => {
         return {
             getFilterBio: builder.query({
-                query: (filter) => {
-                    return {url: "/api/biodata/filter", method: "POST", data: filter}
-                },
-                providesTags: ["Biodatas"],
+                query: (filter) => ({url: "/api/biodata/filter", method: "POST", data: filter})
             }),
 
-            updateFilterBio: builder.mutation({
-                query: (filter) => {
-                    return {url: "/api/biodata/filter", method: "POST", data: filter}
-                },
-                invalidatesTags: ['Biodatas'],
+            fetchAllBioData: builder.query({
+                query: () => ({url: "/api/biodata/all", method: "GET"}),
+                providesTags: ['allBiodata'],
             })
         }
     },
@@ -33,4 +28,4 @@ export const bioDataApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 
-export const {useGetFilterBioQuery, useUpdateFilterBioMutation} = bioDataApi
+export const {useGetFilterBioQuery, useFetchAllBioDataQuery} = bioDataApi

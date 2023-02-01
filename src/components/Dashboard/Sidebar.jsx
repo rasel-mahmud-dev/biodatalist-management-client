@@ -23,7 +23,7 @@ const DashboardSidebar = ({isOpen}) => {
         {label: "Edit Biodata", icon: "/icons/editbiodata-ico.svg", href: "/user/edit-biodata", roles: ["ADMIN", "CUSTOMER"]},
         {label: "Short list", icon: "/icons/shortlist-ico.svg", href: "", roles: ["CUSTOMER"]},
         {label: "Users list", icon: "/icons/shortlist-ico.svg", href: "/admin/users", roles: ["ADMIN"]},
-        {label: "All BioData", icon: "/icons/shortlist-ico.svg", href: "", roles: ["ADMIN"]},
+        {label: "All BioData", icon: "/icons/shortlist-ico.svg", href: "/admin/all-biodata", roles: ["ADMIN"]},
         {label: "Ignore list", icon: "/icons/ignorelist-ico.svg", href: "", roles: ["CUSTOMER"]},
         {label: "My purchased", icon: "/icons/mypurchased-ico.svg", href: "", roles: ["CUSTOMER"]},
         {label: "Support & Report", icon: "/icons/support-ico.svg", href: "", roles: ["CUSTOMER"]},
