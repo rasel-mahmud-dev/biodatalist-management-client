@@ -280,3 +280,27 @@ ul {
     transform: translateX(-50%);
     z-index: 200;
 }
+
+
+
+
+
+/*********** Pagination *************/
+.paginate-item{
+    @apply w-10 h-10 hover:bg-primary
+    cursor-pointer transition
+    transition-colors hover:text-white
+    bg-primary/10
+    font-semibold text-primary
+    text-sm rounded-full
+    flex justify-center
+    items-center select-none;
+}
+
+.paginate-item svg{
+    /*width: 7px;*/
+}
+
+.paginate-active{
+    @apply bg-primary font-semibold text-white
+}

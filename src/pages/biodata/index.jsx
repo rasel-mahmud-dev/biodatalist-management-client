@@ -1,36 +1,65 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import FilterBiodataSidebar from "components/FilterBiodataSidebar/FilterBiodataSidebar";
-import { useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Biodata from "components/Biodata";
 import Backdrop from "components/Backdrop";
 import Loader from "components/Loader";
 import {bioDataApi, useGetFilterBioQuery, useUpdateFilterBioMutation} from "../../store/services/bioDataApi";
+import Pagination from "components/Pagination";
+import {changePagination} from "../../store/slices/biodataSlice";
 
 
 const BiodataFilterPage = () => {
 
-    const {filterBiodata} = useSelector(state => state.biodataState)
+    const {filterBiodata, totalItems, filter, pagination} = useSelector(state => state.biodataState)
 
     let {isLoading, isFetching} = useGetFilterBioQuery({})
 
     // lazy query // trigger when filter value changes
     const [trigger] = bioDataApi.endpoints.getFilterBio.useLazyQuery({})
 
+    const dispatch   = useDispatch()
 
-    async function handleSearchBioData(data) {
-        let filter = {}
-        if (data.biodataNo) {
-            filter.biodataNo = data.biodataNo
+
+    // async function handleSearchBioData(data) {
+    //     let filter = {}
+    //     if (data.biodataNo) {
+    //         filter.biodataNo = data.biodataNo
+    //         filter.pageNumber = 1
+    //     }
+    //     // trigger re-fetching with new filter payload
+    //     trigger(filter)
+    // }
+
+
+    // re-fetch bio data whenever change those values....
+    useEffect(()=>{
+        let payload = {}
+        if (filter.biodataNo) {
+            payload.biodataNo = filter.biodataNo
         }
+        payload.pageNumber = pagination.currentPage
+        payload.perPage = pagination.perPage
+
         // trigger re-fetching with new filter payload
-        trigger(filter)
+        trigger(payload)
+
+    }, [
+        filter.biodataNo,
+        pagination.currentPage,
+        pagination.perPage
+    ])
+
+
+    function handlePageChange(pageNumber){
+        dispatch(changePagination({pageNumber}))
     }
 
 
     return (
         <div className="flex">
 
-            <FilterBiodataSidebar onSearchBioData={handleSearchBioData}/>
+            <FilterBiodataSidebar/>
 
             <div className="w-full">
                 <div className="container">
@@ -43,13 +72,23 @@ const BiodataFilterPage = () => {
                     </>}
 
 
-                    <div className="route-title">Filter Biodata</div>
+                    <div className="route-title flex items-center">
+                        Filter Biodata
+                        <div className="ml-4">({totalItems})</div>
+                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
                         {filterBiodata && filterBiodata.map((biodata) => (
                             <Biodata biodata={biodata} key={biodata._id}/>
                         ))}
                     </div>
+
+
+                    <div className="my-20">
+                        <Pagination onChange={handlePageChange} perPage={pagination.perPage} pageNumber={pagination.currentPage} totalItem={totalItems}  />
+                    </div>
+
+
                 </div>
             </div>
         </div>
