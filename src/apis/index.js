@@ -2,7 +2,7 @@
 import axios from "axios";
 
 
-export const backend = "http://localhost:2000"
+export const backend =  process.env.NODE_ENV === "development" ? "http://localhost:2000" : "https://biodata-management.vercel.app"
 
 
 const apis = axios.create({
