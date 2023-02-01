@@ -2,7 +2,7 @@
 
 .sidebar {
     width: var(--sidebar-width);
-    height: calc(100vh - 280px);
+    height: inherit;
     box-shadow: 10px 0 13px -7px #dbdbdb;
     background: #faf9fb;
     position: relative;

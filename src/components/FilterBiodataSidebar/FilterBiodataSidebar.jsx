@@ -106,7 +106,7 @@ const FilterBiodataSidebar = () => {
                             </div>
                             <div>
                                 {/***** putting default values that store inside redux store ******/}
-                                { addressInput(errors, {
+                                {addressInput(errors, {
                                     1: {
                                         presentAddress: filter.presentAddress,
                                         permanentAddress: filter.permanentAddress
@@ -123,44 +123,38 @@ const FilterBiodataSidebar = () => {
 
 
     return (
-        <div>
-            <Sidebar onClose={() => dispatch(toggleSidebar())} isOpen={isOpenSidebar}>
 
-                <div className="p-4">
-                    <div className="tab-root">
-                        {filterType.map((item, i) => (
-                            <div key={i} onClick={() => setActiveTab(i)}
-                                 className={`tab ${activeTab === i ? "tab-active" : ""}`}>
-                                <span>{item}</span>
-                            </div>
-                        ))}
-                    </div>
+        <Sidebar onClose={() => dispatch(toggleSidebar())} isOpen={isOpenSidebar}>
 
-                    {/**** clear all filter ****/}
-                    <Button onClick={handleClearFilterValue} className="mt-4 block ml-auto">Clear Filter</Button>
-
-                    <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
-
-                        {activeTab === 0 ? renderFilterForm() : (
-                            <div>
-                                <Input
-                                    label="Biodata No"
-                                    defaultValue={filter.biodataNo}
-                                    register={register("biodataNo")}
-                                />
-
-                            </div>
-                        )}
-
-                        <Button className="my-20 mx-auto block">Search</Button>
-
-                    </form>
-
-
+            <div className="p-4">
+                <div className="tab-root">
+                    {filterType.map((item, i) => (
+                        <div key={i} onClick={() => setActiveTab(i)}
+                             className={`tab ${activeTab === i ? "tab-active" : ""}`}>
+                            <span>{item}</span>
+                        </div>
+                    ))}
                 </div>
 
-            </Sidebar>
-        </div>
+                {/**** clear all filter ****/}
+                <Button onClick={handleClearFilterValue} className="mt-4 block ml-auto">Clear Filter</Button>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
+
+                    {activeTab === 0 ? renderFilterForm() : (
+                        <div>
+                            <Input
+                                label="Biodata No"
+                                defaultValue={filter.biodataNo}
+                                register={register("biodataNo")}
+                            />
+
+                        </div>
+                    )}
+                    <Button className="my-20 mx-auto block">Search</Button>
+                </form>
+            </div>
+        </Sidebar>
     );
 };
 

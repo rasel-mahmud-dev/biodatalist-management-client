@@ -1,6 +1,6 @@
 import React from 'react';
 import {BiGlobe} from "react-icons/bi";
-import {FaFacebook, FaLinkedin} from "react-icons/fa";
+import {FaFacebook, FaGithub, FaLinkedin} from "react-icons/fa";
 import Link from "next/link";
 
 const Footer = () => {
@@ -14,13 +14,14 @@ const Footer = () => {
                 </ul>
 
                 <ul className="flex items-center gap-4">
-                    <li className="social-link-item"><Link href=""><BiGlobe /></Link></li>
-                    <li className="social-link-item"><Link href=""><FaLinkedin /></Link></li>
-                    <li className="social-link-item"><Link href=""><FaFacebook /></Link></li>
+                    <li className="social-link-item"><Link target={"_blank"} href="https://rasel-portfolio.vercel.app"><BiGlobe /></Link></li>
+                    <li className="social-link-item"><Link target={"_blank"} href="https://www.linkedin.com/in/rasel-mahmud-dev"><FaLinkedin /></Link></li>
+                    <li className="social-link-item"><Link target={"_blank"} href="https://github.com/rasel-mahmud-dev"><FaGithub /></Link></li>
+                    <li className="social-link-item"><Link target={"_blank"} href="https://www.facebook.com/rasel.mahmud.dev"><FaFacebook /></Link></li>
                 </ul>
 
                 <div>
-                    © 2021-{new Date().getFullYear()} biodatalist.com
+                    © 2018-{new Date().getFullYear()} biodatalist.com
                 </div>
             </div>
         </footer>

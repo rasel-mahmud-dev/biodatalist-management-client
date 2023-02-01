@@ -1,17 +1,20 @@
 import React from 'react';
+import {useGetBiodataStatsQuery} from "../../store/services/bioDataApi";
 
-const UserStatistics = () => {
+const UserStatistics = ({isShowTitle = true}) => {
+
+    let {data: stats = {}} = useGetBiodataStatsQuery()
 
     let data = {
-        "Total Groom and Bride's Biodatas": {value: 2312, img: "/icons/couple.svg", className: "!w-32"},
-        "Total Groom's Biodatas": {value: 1232, img: "/icons/male.svg"},
-        "Total Bride's Biodatas": {value: 1232, img: "/icons/female.svg"},
-        "Total Successful Marriages": {value: 102, img: "/icons/married.svg", className: "w-28"},
+        "Total Groom and Bride's Biodatas": {value: stats.maleAndfemaleBiodata, img: "/icons/couple.svg", className: "!w-32"},
+        "Total Groom's Biodatas": {value: stats.maleBiodata, img: "/icons/male.svg"},
+        "Total Bride's Biodatas": {value: stats.femaleBiodata, img: "/icons/female.svg"},
+        "Total Users": {value: stats.totalUser, img: "/icons/married.svg", className: "w-28"},
     }
 
     return (
-        <div className="mt-32">
-            <h2 className="section-title text-center">User Statistics</h2>
+        <div className="mt-10">
+            {isShowTitle && <h2 className="section-title text-center mt-24">User Statistics</h2> }
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
                 {Object.keys(data).map(key=>(
@@ -25,8 +28,6 @@ const UserStatistics = () => {
                 ))}
 
             </div>
-
-
         </div>
     );
 };

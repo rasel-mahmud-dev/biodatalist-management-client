@@ -39,13 +39,19 @@ ul {
 
 :root {
     --header-height: 80px;
-    --sidebar-width: 280px
+    --sidebar-width: 350px
+}
+
+.content{
+    flex-grow: 1;
 }
 
 .navigation{
     z-index: 200;
 }
-
+.active{
+    @apply text-primary;
+}
 /**** Input component global classes ***************/
 .input-group {
     @apply flex flex-col mt-3 relative;
@@ -189,7 +195,7 @@ ul {
 
 
 .section-title {
-    @apply text-5xl font-bold text-gray-900
+    @apply text-4xl font-bold text-gray-900
 }
 
 .card {

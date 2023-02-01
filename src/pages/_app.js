@@ -13,10 +13,14 @@ function App({Component, pageProps}) {
     return (
         <Provider store={store}>
             <AppWrapper>
-                <Navigation/>
-                <div className="navigation-height"></div>
-                <Component {...pageProps} />;
-                <Footer />
+                <div className="flex flex-col h-screen">
+                        <div className="content" >
+                            <Navigation/>
+                            <div className="navigation-height"></div>
+                            <Component {...pageProps} />
+                        </div>
+                    <Footer />
+                </div>
             </AppWrapper>
         </Provider>
     )

@@ -43,10 +43,12 @@ Accordion.Item = AccordionItem
 export default Accordion;
 
 
-// <div {...attr}>
-//     {children.map(item => React.cloneElement(item,
-//         {
-//             ...item.props.children,
-//             className: `accordion-item ${isOpen ? "open-accordion" : "close-accordion"} ${item.props.className ? item.props.className : ""}`
-//         })
-//     )}
+
+/*** uses
+ <Accordion openIds={[]}>
+    <Accordion.Item dataId={number | string}>
+        First element Item head
+        Second element Accordion content
+    </Accordion.Item>
+ </Accordion>
+ * */

@@ -25,6 +25,11 @@ export const bioDataApi = createApi({
 
             fetchBiodataDetail: builder.query({
                 query: (biodataId) => ({url: `/api/biodata/${biodataId}`, method: "GET", providesTags: [biodataId]}),
+            }),
+
+
+            getBiodataStats: builder.query({
+                query: () => ({url: `/api/biodata/stats`, method: "GET"}),
             })
         }
     },
@@ -34,4 +39,4 @@ export const bioDataApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 
-export const {useGetFilterBioQuery, useFetchAllBioDataQuery, useFetchBiodataDetailQuery} = bioDataApi
+export const {useGetFilterBioQuery, useFetchAllBioDataQuery, useFetchBiodataDetailQuery, useGetBiodataStatsQuery} = bioDataApi

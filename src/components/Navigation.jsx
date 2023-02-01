@@ -9,6 +9,7 @@ import {FaSignOutAlt} from "react-icons/fa";
 import {logoutAction} from "../store/slices/authSlice";
 import {HiBars4} from "react-icons/hi2";
 import {toggleSidebar} from "../store/slices/appSlice";
+import ActiveLink from "components/ActiveLink";
 
 const Navigation = () => {
     const {auth} = useSelector(state => state.authState)
@@ -25,7 +26,7 @@ const Navigation = () => {
     const navItems = [
         {label: "Home", href: "/"},
         {label: "Biodata", href: "/biodata"},
-        {label: "About us", href: "/"},
+        {label: "About us", href: "/about"},
         {label: "Ask", href: "/"},
         {label: "Direction", href: "/"},
         {label: "Contact", href: "/"},
@@ -47,7 +48,7 @@ const Navigation = () => {
                     <ul className="flex items-center gap-x-6 py-4">
                         {navItems.map(item=>(
                             <li key={item.label} className="text-sm font-medium ">
-                                <Link href={item.href}>{item.label}</Link>
+                                <ActiveLink activeClassName="active" href={item.href}>{item.label}</ActiveLink>
                             </li>
                         ))}
                     </ul>
@@ -92,6 +93,8 @@ const Navigation = () => {
         </div>
     );
 };
+
+
 
 
 export default Navigation;
