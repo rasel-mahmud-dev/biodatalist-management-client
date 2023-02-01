@@ -17,6 +17,7 @@ export const authSlice = createSlice({
         logoutAction(state, action) {
             state.auth = null
             state.authLoaded = true
+            state.biodata = null
             localStorage.removeItem("token")
         }
     },

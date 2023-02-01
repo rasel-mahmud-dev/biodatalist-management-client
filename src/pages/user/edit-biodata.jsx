@@ -16,14 +16,22 @@ import {
 
 
 import {updateBiodataAction} from "../../store/actions/biodataAction";
+import Popup from "components/Popup";
+import {useRouter} from "next/router";
 
 
 const EditBiodata = () => {
 
     const [activeStep, setActiveStep] = useState(0)
 
+    const router = useRouter()
+
     const authState = useSelector(state => state.authState)
     const dispatch = useDispatch()
+
+    const [openCompletePopup, setOpenCompletePopup] = useState(false)
+
+
 
     const {
         register,
@@ -85,14 +93,30 @@ const EditBiodata = () => {
     }
 
 
+    // save every step data in database
     function onSubmit(data) {
         setStepBiodata(prevState => ({
             ...prevState,
             [activeStep]: data
         }))
 
+        // if is the last step then set isCompleted to detect biodata completed or not
+        if(activeStep === 6){
+            data.isCompleted = true
+        }
+
+        // dispatch action
         dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
-            setActiveStep(prevState => prevState + 1)
+            setActiveStep(prevState => {
+                let nextStep = prevState + 1
+                if(nextStep === 7){
+                    // if last step completed then open popup modal
+                    setOpenCompletePopup(true)
+                }else {
+                    setOpenCompletePopup(false)
+                    return nextStep
+                }
+            })
         })
     }
 
@@ -100,6 +124,7 @@ const EditBiodata = () => {
         setActiveStep(stepIndex)
     }
 
+    // step render form sequentially
     const stepRenderForm = {
         0: generalInfoInput,
         1: addressInput,
@@ -126,6 +151,32 @@ const EditBiodata = () => {
         return completedStepNumberArr;
     }
 
+    function handleJumpMyBiodata(){
+        setOpenCompletePopup(false)
+        setActiveStep(0)
+        router.push("/user/mybio")
+    }
+
+    function renderPopupCompletedModal(){
+        return (
+            <Popup
+                className="center-scale-popup w-full max-w-md py-7"
+                backdropClass="global-overlay"
+                isWithBackdrop={true}
+                onClose={()=>setOpenCompletePopup(false)}
+                isOpen={openCompletePopup}
+            >
+                <h1 className="route-title text-center">Wellcome!</h1>
+                <p className="text-center text-sm font-medium">Your biodata has been completed</p>
+
+                <Button className="mx-auto block mt-6" onClick={handleJumpMyBiodata}>See My Biodata</Button>
+
+            </Popup>
+
+        )
+    }
+
+
     return (
         <DashboardLayout containerClass="container-full">
             <h1 className="route-title">Edit Bio Data</h1>
@@ -150,7 +201,7 @@ const EditBiodata = () => {
 
 
                             <div className="flex justify-between mt-14">
-                                <Button>Back</Button>
+                                <Button onClick={()=>handleChangeStep(activeStep - 1)} disabled={activeStep === 0 }>Back</Button>
                                 <Button type="submit">{activeStep !== 6 ? "Save and Next" : "Complete"}</Button>
                             </div>
                         </form>
@@ -158,6 +209,7 @@ const EditBiodata = () => {
                     </div>
                 </div>
 
+                {renderPopupCompletedModal()}
 
             </div>
 

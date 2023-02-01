@@ -8,11 +8,12 @@ import Link from "next/link";
 import { loginOrRegistrationAction} from "../../store/actions/authAction";
 import {useDispatch} from "react-redux";
 import ErrorMessage from "components/ErrorMessage";
+import {useRouter} from "next/router";
 
 const Login = () => {
 
     const dispatch = useDispatch()
-
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -35,7 +36,9 @@ const Login = () => {
                 email: data.email.trim(),
                 password: data.password.trim(),
             }
-        })).unwrap().catch(ex=>{
+        })).unwrap().then(()=>{
+            router.push("/")
+        }).catch(ex=>{
             if(ex && typeof ex === "string"){
                 setResponseErrorMsg(ex)
             }

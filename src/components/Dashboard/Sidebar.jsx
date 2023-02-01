@@ -37,7 +37,7 @@ const DashboardSidebar = ({isOpen}) => {
                     <h2>{auth.username}</h2>
 
                     <h3 className="mt-2  font-medium text-gray-500">Biodata Status</h3>
-                    <div className="bg-gray-200 py-1 px-4 text-sm rounded-md mt-1">{biodata ? "Completed" : "Incompleted"}</div>
+                    <div className="bg-gray-200 py-1 px-4 text-sm rounded-md mt-1">{biodata && biodata.isCompleted ? "Completed" : "Incompleted"}</div>
 
                     <Link href="/user/mybio"><Button className="mt-4">My Bio Data</Button></Link>
 
