@@ -8,6 +8,7 @@ import {bioDataApi, useGetFilterBioQuery} from "../../store/services/bioDataApi"
 import Pagination from "components/Pagination";
 import {changePagination, changeSort} from "../../store/slices/biodataSlice";
 import Select from "components/Select";
+import Head from "next/head";
 
 
 const BiodataFilterPage = () => {
@@ -89,6 +90,9 @@ const BiodataFilterPage = () => {
 
     return (
         <div className="flex">
+            <Head>
+                <title>Biodata find</title>
+            </Head>
 
             <FilterBiodataSidebar/>
 

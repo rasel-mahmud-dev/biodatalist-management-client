@@ -50,6 +50,11 @@ ul {
 
 .navigation {
     z-index: 200;
+
+    header{
+        min-height: 80px;
+    };
+
     @include getDown(768px){
         .nav-items{
             position: absolute;
@@ -361,7 +366,7 @@ ul {
 }
 
 
-/***** slicer ***** */
+/***** age range slider ***** */
 .horizontal-slider {
     position: relative;
     width: 100%;
@@ -390,5 +395,42 @@ ul {
         height: 20px;
         display: block;
 
+    }
+}
+
+
+/***** social links *****/
+
+.social-icon {
+    @apply hover:bg-primary rounded-full
+    text-gray-900 hover:text-white w-10 h-10
+    md:w-8 md:h-8 flex justify-center items-center
+    border
+    rounded-full;
+    border-color: rgb(204 210 255 / 22%);
+    background-color: rgb(154 167 255 / 9%);
+    color: #5d72ff;
+    &:hover {
+        transform: translateY(1px);
+
+        .svg-inline--fa {
+            color: #5D72FF !important;
+        }
+    }
+
+    transition: all .1s linear;
+
+    .svg-inline--fa {
+        color: #6e6e6e;
+        //font-size: 20px;
+        width: 20px;
+    }
+
+    .fa-facebook-square {
+        color: #6161ff;
+    }
+
+    .fa-instagram {
+        color: red;
     }
 }

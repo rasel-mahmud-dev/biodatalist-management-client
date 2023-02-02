@@ -9,8 +9,10 @@ export default function Home() {
     return (
         <div className="">
             <Head>
-                <title>Create Next App</title>
-                <link rel="icon" href="/public/favicon.ico"/>
+                <title>Home page of Biodata Management</title>
+                <meta name="description" content="Rasel Mahmud Portfolio website"/>
+                <meta name="keywords" content="Rasel Mahmud, Rasel Mahmud portfolio, rasel.mahmud.dev, rasel"/>
+                <meta name="author" content="Rasel Mahmud"/>
             </Head>
 
             <section className="banner relative">

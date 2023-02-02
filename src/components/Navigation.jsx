@@ -7,7 +7,6 @@ import Popup from "components/Popup";
 import {MdDashboard} from "react-icons/md";
 import {FaSignOutAlt} from "react-icons/fa";
 import {logoutAction} from "../store/slices/authSlice";
-import {HiBars4} from "react-icons/hi2";
 import {toggleSidebar} from "../store/slices/appSlice";
 import ActiveLink from "components/ActiveLink";
 
@@ -65,14 +64,14 @@ const Navigation = () => {
                     </ul>
                 </nav>
                 <nav>
-                    <ul className="flex items-center gap-x-4 py-4">
+                    <ul className="flex items-center gap-x-4 py-2">
                         <li>
                             {auth ? (
                                 <div onClick={() => setOpenAuthPopup(!openAuthPopup)}
                                      onMouseLeave={() => setOpenAuthPopup(false)}
                                      onMouseEnter={() => setOpenAuthPopup(true)}
                                      className="relative">
-                                    <Avatar username={auth.username}  className="h-8 w-8" src={auth.avatar}/>
+                                    <Avatar username={auth.username}  className="h-10 w-10" src={auth.avatar}/>
                                     <Popup isOpen={openAuthPopup} className="right-0 shadow-xl">
                                         <ul>
                                             <li className="flex items-center gap-x-2">
