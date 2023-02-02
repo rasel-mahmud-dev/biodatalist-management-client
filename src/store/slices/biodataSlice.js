@@ -58,9 +58,15 @@ export const biodataSlice = createSlice({
             bioDataApi.endpoints.getFilterBio.matchFulfilled,
             (state, { payload }) => {
                state.filterBiodata = payload.biodata
+
                 if(payload.count !== undefined){
                     state.totalItems = payload.count
                 }
+
+                if(payload.biodata && payload.biodata.length === 0){
+                    state.totalItems = 0
+                }
+
             }
         )
     },

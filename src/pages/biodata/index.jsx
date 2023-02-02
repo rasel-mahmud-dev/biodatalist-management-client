@@ -16,7 +16,7 @@ const BiodataFilterPage = () => {
 
     const {filterBiodata, totalItems, filter, sort, pagination} = useSelector(state => state.biodataState)
 
-    let {isLoading, isFetching} = useGetFilterBioQuery({})
+    // let {isLoading, isFetching} = useGetFilterBioQuery({})
 
     const [startLoading, setStartLoading] = useState(false)
 
@@ -107,7 +107,7 @@ const BiodataFilterPage = () => {
             <div className="w-full">
                 <div className="container">
 
-                    {(isLoading || isFetching || startLoading) && <>
+                    {(startLoading) && <>
                         {/**** backdrop overlay *****/}
                         <div id="filter-overlay"></div>
                         <Backdrop backdropRoot="filter-overlay" className="fetch-bio-overlay"/>

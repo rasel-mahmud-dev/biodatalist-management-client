@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FaAngleLeft, FaAngleRight, FaTimes} from "react-icons/fa";
 
-const MultiStepSelect = ({error, label, value: a, name, defaultValue, defaultOption, register}) => {
+const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, register}) => {
 
     const [value, setValue] = useState({
         country: "",
@@ -9,7 +9,6 @@ const MultiStepSelect = ({error, label, value: a, name, defaultValue, defaultOpt
         district: "",
         upazila: "",
     })
-
 
     useEffect(()=>{
         if(!defaultValue) return;
@@ -103,6 +102,7 @@ const MultiStepSelect = ({error, label, value: a, name, defaultValue, defaultOpt
                 updateState["upazila"] = value
             }
             // send update state back where this component used
+            console.log(getValue(updateState))
             register.onChange({target: {name: name, value: getValue(updateState)}})
 
             // fetch data for next step

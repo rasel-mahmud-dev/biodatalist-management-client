@@ -13,14 +13,15 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
 
     const router = useRouter()
 
-    const { register, handleSubmit } = useForm();
+    const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch()
     const onSubmit = (data) => {
         let filter = {...data}
-        if(!data.permanentAddress){
+        if (!data.permanentAddress) {
             filter.permanentAddress = undefined
-        } else if(!data.presentAddress){
+        }
+        if (!data.presentAddress) {
             filter.presentAddress = undefined
         }
 
@@ -35,7 +36,8 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
     return (
         <div className={`${className}`} {...attr}>
             <div className="shadow-lg rounded-xl bg-white p-5 my-20 ">
-                <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-10 pb-5">
+                <form onSubmit={handleSubmit(onSubmit)}
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-10 pb-5">
                     <Select
                         label="Biodata Type"
                         option={biodataOptions.biodataType}
@@ -60,11 +62,12 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
                     <MultiStepSelect
                         defaultOption={{name: "Present Address", value: ""}}
                         label="Permanent Address"
+                        name="permanentAddress"
                         register={register("permanentAddress")}
                     />
 
                     <Button className="w-max flex items-center gap-x-1 mt-8 ">
-                        <BiSearch />
+                        <BiSearch/>
                         Search
                     </Button>
                 </form>
