@@ -67,8 +67,19 @@ const EditBiodata = () => {
     }, [authState.biodata])
 
 
+
+    function makeDateYYYYMMDD(name, value){
+        if(name === "birthDay" && value){
+           let TIndex = value.lastIndexOf("T")
+            return value.slice(0, TIndex)
+        } else {
+            return value
+        }
+    }
+
     function makeBioDataToStepGroup() {
         let updateBiodataDefault = {}
+
 
         Object.keys(steps).forEach((key, index) => {
             let stepNames = steps[key]
@@ -76,7 +87,7 @@ const EditBiodata = () => {
             stepNames.forEach(name => {
                 updateBiodataDefault[index] = {
                     ...updateBiodataDefault[index],
-                    [name]: authState.biodata[name]
+                    [name]: makeDateYYYYMMDD(name, authState.biodata[name])
                 }
             })
         })
@@ -178,7 +189,6 @@ const EditBiodata = () => {
         )
     }
 
-
     return (
         <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
             <h1 className="route-title">Edit Bio Data</h1>
@@ -192,6 +202,7 @@ const EditBiodata = () => {
 
             <div className="max-w-3xl mx-auto ">
                 <div className="flex justify-center gap-x-10">
+                    {/***** render all step from array *****/}
                     <StepBiodataSection
                         onChangeStep={handleChangeStep}
                         activeStep={activeStep}

@@ -15,7 +15,6 @@
 - User can add their biodata 
 - Advance Filter biodata 
 - Advance Address chooser Input multi-step country, division, district and upzila.
-- Advance Multi-Step Form Input 
 - Admin Dashboard panel 
 - User Dashboard panel 
 - Sidebar list item change dynamically when change role
@@ -49,4 +48,26 @@
 - /admin/users: all users  for Admin Role
 - /admin/all-biodata: all biodata  for Admin Role
 - and much more...
+
+
+
+
+### Some Route Preview
+
+![](public/thumbs/localhost_3000_(8)copy.webp)
+
+![](public/thumbs/localhost_3000_(12)copy.webp)
+
+![](public/thumbs/localhost_3000_(9)copy.webp)
+
+![](public/thumbs/localhost_3000_(13)copy.webp)
+
+![](public/thumbs/localhost_3000_admin_all-biodatacopy.webp)
+
+![](public/thumbs/2023-02-02_193442copy.webp)
+
+![](public/thumbs/2023-02-02_191932copy.webp)
+
+
+
 

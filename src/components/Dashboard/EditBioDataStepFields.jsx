@@ -53,6 +53,7 @@ export function generalInfoInput(errors, stepBioData, register) {
     return (
         <div>
             <h2 className="font-semibold text-xl pb-1 mb-4 border-b border-primary/40">General Info</h2>
+
             {
                 fields.map(field => (
                     field.options ? (
