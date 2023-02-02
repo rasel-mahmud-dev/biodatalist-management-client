@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "styles/--mixin";
+
 html,
 body {
     padding: 0;
@@ -48,6 +50,33 @@ ul {
 
 .navigation {
     z-index: 200;
+    @include getDown(768px){
+        .nav-items{
+            position: absolute;
+            background: white;
+            transform: translateY(-110%);
+            transition: all .4s ease;
+            width: 100%;
+            padding: 10px;
+            left: 0;
+            top: 0;
+            box-shadow: 0 3px 19px 3px #979797;
+            ul{
+                flex-direction: column;
+                li{
+                    margin: 10px 0px;
+                }
+            }
+        }
+    };
+
+    &.expand-mobile-nav {
+        @include getDown(768px) {
+            .nav-items {
+                transform: translateY(0);
+            }
+        }
+    }
 }
 
 .active {

@@ -18,6 +18,8 @@ const Navigation = () => {
 
     const [openAuthPopup, setOpenAuthPopup] = useState(false)
 
+    const [expandMobileNav, setExpandMobileNav] = useState(false)
+
 
     function handleLogout() {
         dispatch(logoutAction())
@@ -37,14 +39,23 @@ const Navigation = () => {
         dispatch(toggleSidebar())
     }
 
+    function handleToggleMobileNav(){
+        setExpandMobileNav(!expandMobileNav)
+    }
+
     return (
-        <div className="bg-white shadow-xl fixed top-0 left-0 w-full navigation">
+        <div className={`bg-white shadow-xl fixed top-0 left-0 w-full navigation ${expandMobileNav ? "expand-mobile-nav": ""}` }>
             <header className="flex justify-between container mx-auto items-center">
-                <div className="flex items-center justify-between gap-x-2">
-                    <HiBars4 className="text-2xl cursor-pointer block lg:hidden" onClick={handleToggleSidebar}/>
-                    <img className="w-14" src="/icons/bio.png" alt=""/>
+                <div className="flex items-center justify-between gap-x-2 relative z-50">
+
+                    <img className="w-8 cursor-pointer block lg:hidden" src="/icons/menu.svg" onClick={handleToggleSidebar} alt="menu"/>
+
+                    <Link href="/">
+                        <img className="w-28" src="/icons/bio-logo.svg" alt=""/>
+                    </Link>
+
                 </div>
-                <nav>
+                <nav className="nav-items">
                     <ul className="flex items-center gap-x-6 py-4">
                         {navItems.map(item=>(
                             <li key={item.label} className="text-sm font-medium ">
@@ -61,11 +72,11 @@ const Navigation = () => {
                                      onMouseLeave={() => setOpenAuthPopup(false)}
                                      onMouseEnter={() => setOpenAuthPopup(true)}
                                      className="relative">
-                                    <Avatar username={auth.username} src={auth.avatar}/>
+                                    <Avatar username={auth.username}  className="h-8 w-8" src={auth.avatar}/>
                                     <Popup isOpen={openAuthPopup} className="right-0 shadow-xl">
                                         <ul>
                                             <li className="flex items-center gap-x-2">
-                                                <Avatar username={auth.username} className="h-8 w-8" imgClass="w-8 h-8"
+                                                <Avatar username={auth.username} className="h-8 w-8"
                                                         src={auth.avatar}/>
                                                 <h4>{auth.username}</h4>
                                             </li>
@@ -87,7 +98,11 @@ const Navigation = () => {
                                 <Button className="" variant="outline"><Link href="/auth/login">Login</Link></Button>
                             )}
                         </li>
+                        <li>
+                            <img  className="w-6 relative z-50 cursor-pointer block md:hidden" src="/icons/Vector(1).svg" onClick={handleToggleMobileNav}/>
+                        </li>
                     </ul>
+
                 </nav>
             </header>
         </div>
