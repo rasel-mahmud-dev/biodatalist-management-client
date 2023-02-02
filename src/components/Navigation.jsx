@@ -50,9 +50,9 @@ const Navigation = () => {
         {label: "Home", href: "/"},
         {label: "Biodata", href: "/biodata"},
         {label: "About Me", href: "/about"},
-        {label: "Ask", href: "/"},
-        {label: "Direction", href: "/"},
-        {label: "Contact", href: "/"},
+        {label: "Ask", href: "/aks"},
+        {label: "Direction", href: "/direction"},
+        {label: "Contact", href: "/contact"},
     ]
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import FilterBiodataSidebar from "components/FilterBiodataSidebar/FilterBiodataSidebar";
 import {useDispatch, useSelector} from "react-redux";
 import Biodata from "components/Biodata";
@@ -9,6 +9,7 @@ import Pagination from "components/Pagination";
 import {changePagination, changeSort} from "../../store/slices/biodataSlice";
 import Select from "components/Select";
 import Head from "next/head";
+import scrollTop from "../../utils/scrollTop";
 
 
 const BiodataFilterPage = () => {
@@ -16,6 +17,8 @@ const BiodataFilterPage = () => {
     const {filterBiodata, totalItems, filter, sort, pagination} = useSelector(state => state.biodataState)
 
     let {isLoading, isFetching} = useGetFilterBioQuery({})
+
+    const [startLoading, setStartLoading] = useState(false)
 
     // lazy query // trigger when filter value changes
     const [trigger] = bioDataApi.endpoints.getFilterBio.useLazyQuery({})
@@ -25,6 +28,9 @@ const BiodataFilterPage = () => {
 
     // re-fetch bio data whenever change those values....
     useEffect(()=>{
+        // start loading
+        setStartLoading(true)
+
         let payload = {}
         if (filter.biodataNo) {
             payload.biodataNo = filter.biodataNo
@@ -55,9 +61,11 @@ const BiodataFilterPage = () => {
             }
         }
 
-
         // trigger re-fetching with new filter payload
-        trigger(payload)
+        trigger(payload).unwrap().finally(()=>{
+            setStartLoading(false)
+            scrollTop(0)
+        })
 
     }, [
         filter.biodataNo,
@@ -99,7 +107,7 @@ const BiodataFilterPage = () => {
             <div className="w-full">
                 <div className="container">
 
-                    {(isLoading || isFetching) && <>
+                    {(isLoading || isFetching || startLoading) && <>
                         {/**** backdrop overlay *****/}
                         <div id="filter-overlay"></div>
                         <Backdrop backdropRoot="filter-overlay" className="fetch-bio-overlay"/>

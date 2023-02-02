@@ -40,11 +40,20 @@ const FilterBiodataSidebar = () => {
 
 
     const onSubmit = (data) => {
-        dispatch(changeFilter({
-            ...data,
-            ageRange,
-            biodataNo: ""
-        }))
+
+        if(activeTab === 1 && data.biodataNo){
+            // only filter by biodata No.
+            dispatch(changeFilter({
+                biodataNo: data.biodataNo
+            }))
+        } else{
+            // only filter all input without biodata No
+            dispatch(changeFilter({
+                ...data,
+                ageRange,
+                biodataNo: ""
+            }))
+        }
     }
 
     function handleClearFilterValue() {
@@ -75,7 +84,6 @@ const FilterBiodataSidebar = () => {
     function renderFilterForm() {
         return (
             <div>
-
                 <div>
                     <Accordion openIds={openAccordionIds}>
                         <Accordion.Item dataId={1} className="cursor-pointer">
