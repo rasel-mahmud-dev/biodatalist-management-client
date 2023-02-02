@@ -10,10 +10,14 @@ import {useDispatch} from "react-redux";
 import ErrorMessage from "components/ErrorMessage";
 import {useRouter} from "next/router"
 import redirectLogin from "../../utils/redirectLogin";
+import Popup from "components/Popup";
+import Loader from "components/Loader";
+import HttpLoadingPopup from "components/HttpLoadingPopup";
 
 const Login = () => {
 
     let [responseErrorMsg, setResponseErrorMsg] = useState("")
+    let [isHttpLoading, setHttpLoading] = useState(false)
 
     const router = useRouter()
 
@@ -31,7 +35,7 @@ const Login = () => {
 
         //clear old error message
         setResponseErrorMsg("")
-
+        setHttpLoading(true)
 
         dispatch(loginOrRegistrationAction({
             type: "login",
@@ -46,7 +50,7 @@ const Login = () => {
             if(ex && typeof ex === "string"){
                 setResponseErrorMsg(ex)
             }
-        })
+        }).finally(()=>setHttpLoading(false))
     }
 
     let redirect = router.query?.redirect
@@ -56,7 +60,13 @@ const Login = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto shadow-2xl rounded-lg p-6 mt-10">
 
-            <h1 className="font-bold text-center text-2xl">Create Account</h1>
+            <h1 className="font-bold text-center text-2xl">Login to your account </h1>
+
+            <HttpLoadingPopup onClose={()=>setHttpLoading(false)} isLoading={isHttpLoading}>
+                <Loader className="loader-center !relative" titleClass="font-medium text-sm" title="Please wait...!"  />
+            </HttpLoadingPopup>
+
+
 
             <ErrorMessage message={responseErrorMsg} />
 

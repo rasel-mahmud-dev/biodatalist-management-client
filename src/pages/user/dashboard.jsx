@@ -7,7 +7,7 @@ const Dashboard = () => {
 
         <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
 
-            <h1 className="route-title">Dashboard</h1>
+            <h1 className="route-title">User Dashboard</h1>
             <UserStatistics isShowTitle={false} />
 
         </DashboardLayout>

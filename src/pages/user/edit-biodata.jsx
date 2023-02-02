@@ -19,6 +19,7 @@ import {updateBiodataAction} from "../../store/actions/biodataAction";
 import Popup from "components/Popup";
 import {useRouter} from "next/router";
 import Loader from "components/Loader";
+import HttpLoadingPopup from "components/HttpLoadingPopup";
 
 
 const EditBiodata = () => {
@@ -184,15 +185,9 @@ const EditBiodata = () => {
 
 
             {/***** save step data loading popup *****/}
-            <Popup
-                className="center-scale-popup w-full max-w-md py-7"
-                backdropClass="global-overlay"
-                isWithBackdrop={true}
-                onClose={()=>{ setSaveDataLoading(false) }}
-                isOpen={saveDataLoading}
-            >
+            <HttpLoadingPopup onClose={()=>setSaveDataLoading(false)} isLoading={saveDataLoading}>
                 <Loader className="loader-center !relative" titleClass="font-medium text-sm" title="Data is saving...!"  />
-            </Popup>
+            </HttpLoadingPopup>
 
 
             <div className="max-w-3xl mx-auto ">
