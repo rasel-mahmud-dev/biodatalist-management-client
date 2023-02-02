@@ -11,6 +11,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 300;
+    -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -58,6 +59,7 @@ ul {
     @include getDown(768px){
         .nav-items{
             position: absolute;
+            z-index: 10;
             background: white;
             transform: translateY(-110%);
             transition: all .4s ease;

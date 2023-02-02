@@ -11,7 +11,7 @@ const AllBiodatas = () => {
     const {data: allBiodata} = useFetchAllBioDataQuery()
 
     return (
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN"]}>
 
             <h1 className="route-title">Biodata List</h1>
 

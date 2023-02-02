@@ -5,7 +5,7 @@ import UserStatistics from "components/HomePage/UserStatistics";
 const Dashboard = () => {
     return (
 
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
 
             <h1 className="route-title">Dashboard</h1>
             <UserStatistics isShowTitle={false} />

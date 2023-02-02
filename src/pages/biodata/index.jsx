@@ -124,8 +124,8 @@ const BiodataFilterPage = () => {
                         </div>
                         <div>
                             <Select onChange={handleSortOrder}>
-                                <option value="1">New</option>
-                                <option value="-1">Old</option>
+                                <option value="-1">New</option>
+                                <option value="1">Old</option>
                             </Select>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const Dashboard = () => {
 
 
     return (
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
 
             <h1 className="route-title">My Bio Data</h1>
 

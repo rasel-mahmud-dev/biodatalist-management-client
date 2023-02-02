@@ -178,7 +178,7 @@ const EditBiodata = () => {
 
 
     return (
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
             <h1 className="route-title">Edit Bio Data</h1>
 
             <div className="max-w-3xl mx-auto ">

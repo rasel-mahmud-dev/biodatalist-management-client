@@ -9,6 +9,7 @@ import { loginOrRegistrationAction} from "../../store/actions/authAction";
 import {useDispatch} from "react-redux";
 import ErrorMessage from "components/ErrorMessage";
 import {useRouter} from "next/router";
+import redirectLogin from "../../utils/redirectLogin";
 
 const Login = () => {
 
@@ -37,13 +38,15 @@ const Login = () => {
                 password: data.password.trim(),
             }
         })).unwrap().then(()=>{
-            router.push("/")
+            redirectLogin(router)
         }).catch(ex=>{
             if(ex && typeof ex === "string"){
                 setResponseErrorMsg(ex)
             }
         })
     }
+
+    let redirect = router.query?.redirect
 
 
     return (
@@ -84,7 +87,7 @@ const Login = () => {
             <SocialLogin  />
 
             <div className="text-sm font-medium mt-4 text-center">
-                Already have an account? <span className="hover:text-primary"><Link href="/auth/login">Login</Link></span>
+                Already have an account? <span className="hover:text-primary"><Link href={`/auth/login${redirect ? "?redirect="+redirect : ""}`}>Login</Link></span>
             </div>
 
 

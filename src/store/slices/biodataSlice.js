@@ -6,7 +6,7 @@ const initialState = {
     filterBiodata: [],
     totalItems: 0,
     filter: {},
-    sort: {field: "createdAt", order: 1},
+    sort: {field: "createdAt", order: -1},
     pagination: {
         perPage: 5,
         currentPage: 1

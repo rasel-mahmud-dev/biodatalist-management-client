@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-primary text-white p-8 ">
             <div className="container flex flex-col justify-center items-center gap-4">
-                <ul className="flex items-center gap-4">
+                <ul className="flex items-center gap-4 text-sm md:text-base text-center">
                     <li className=""><Link href="">Privacy Policy</Link></li>
                     <li className=""><Link href="">Terms & Conditions</Link></li>
                     <li className=""><Link href="">Refund Policy</Link></li>

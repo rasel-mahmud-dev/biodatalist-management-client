@@ -3,7 +3,7 @@ import DashboardLayout from "../../Layout/Dashboard";
 
 const Index = () => {
     return (
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN"]}>
 
             <h1 className="route-title">Admin Dashboard</h1>
             

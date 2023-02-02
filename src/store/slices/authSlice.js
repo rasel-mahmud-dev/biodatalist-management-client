@@ -52,6 +52,12 @@ export const authSlice = createSlice({
             }
         })
 
+        // handle rejection
+        builder.addCase(fetchCurrentAuthAction.rejected, (state, action) => {
+            state.auth = null
+            state.authLoaded = true
+        })
+
 
         // handle fetch current user bio data
         builder.addCase(fetchAuthBiodataAction.fulfilled, (state, action) => {

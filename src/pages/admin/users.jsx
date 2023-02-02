@@ -7,11 +7,8 @@ const Users = () => {
 
     const {data: users} = useGetUsersQuery()
 
-    console.log(users)
-
-
     return (
-        <DashboardLayout>
+        <DashboardLayout roles={["ADMIN"]}>
 
             <h1 className="route-title">Users List</h1>
 
