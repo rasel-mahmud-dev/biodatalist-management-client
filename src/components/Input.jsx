@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {createRef, useEffect, useRef} from 'react';
 
 const Input = ({label, type = "text", className = "", register, error, ...attr}) => {
 
@@ -16,7 +16,7 @@ const Input = ({label, type = "text", className = "", register, error, ...attr})
     }, [type, dateRef, attr.defaultValue])
 
     return (
-        <div className={`input-group ${error ? 'input-error' : ''}`} ref={type === "date" ? dateRef : ""}>
+        <div className={`input-group ${error ? 'input-error' : ''}`} ref={type === "date" ? dateRef : undefined }>
             <label htmlFor="">{label}</label>
             <input
                 className={`input ${className}`}

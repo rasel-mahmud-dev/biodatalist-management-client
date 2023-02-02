@@ -10,7 +10,6 @@ import {useDispatch} from "react-redux";
 import ErrorMessage from "components/ErrorMessage";
 import {useRouter} from "next/router"
 import redirectLogin from "../../utils/redirectLogin";
-import Popup from "components/Popup";
 import Loader from "components/Loader";
 import HttpLoadingPopup from "components/HttpLoadingPopup";
 
@@ -65,6 +64,20 @@ const Login = () => {
             <HttpLoadingPopup onClose={()=>setHttpLoading(false)} isLoading={isHttpLoading}>
                 <Loader className="loader-center !relative" titleClass="font-medium text-sm" title="Please wait...!"  />
             </HttpLoadingPopup>
+
+
+            <div className="py-4">
+                <p className="text-xs flex flex-col items-center">
+                    <span className="font-medium">Admin</span>
+                    <span>email: admin@gmail.com</span>
+                    <span>pass: 123</span>
+                </p>
+                <p className="text-xs flex flex-col items-center mt-2">
+                    <span className="font-medium">Customer</span>
+                    <span>email: test@gmail.com</span>
+                    <span>pass: 123</span>
+                </p>
+            </div>
 
 
 

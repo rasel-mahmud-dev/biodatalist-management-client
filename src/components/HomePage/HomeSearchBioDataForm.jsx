@@ -21,9 +21,6 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
         if (!data.permanentAddress) {
             filter.permanentAddress = undefined
         }
-        if (!data.presentAddress) {
-            filter.presentAddress = undefined
-        }
 
         dispatch(changeFilter({
             ...filter
