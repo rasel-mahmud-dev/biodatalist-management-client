@@ -42,16 +42,18 @@ ul {
     --sidebar-width: 350px
 }
 
-.content{
+.content {
     flex-grow: 1;
 }
 
-.navigation{
+.navigation {
     z-index: 200;
 }
-.active{
+
+.active {
     @apply text-primary;
 }
+
 /**** Input component global classes ***************/
 .input-group {
     @apply flex flex-col mt-3 relative;
@@ -121,7 +123,8 @@ ul {
         border: 2px solid;
         @apply bg-transparent border-primary text-primary py-1.5 hover:bg-primary hover:text-white;
     }
-    &:disabled{
+
+    &:disabled {
         background: #d5d5d5;
         color: #9b9b9b;
         pointer-events: none;
@@ -160,7 +163,8 @@ ul {
 
     }
 }
-.center-scale-popup{
+
+.center-scale-popup {
     opacity: 1 !important;
     position: fixed;
     left: 50%;
@@ -169,10 +173,11 @@ ul {
     background: white;
     z-index: 201;
     @apply shadow-2xl;
-    &.popup--close{
+    &.popup--close {
         transform: translateX(-50%) scale(0);
 
     }
+
     &.popup--open {
         transform: translateX(-50%) scale(1);
     }
@@ -232,27 +237,27 @@ ul {
     opacity: 1;
 }
 
-.global-overlay{
+.global-overlay {
     background: #0000004f !important;
     z-index: 200;
 }
 
-.fetch-bio-overlay{
+.fetch-bio-overlay {
     background: rgba(194, 194, 194, 0.52) !important;
     z-index: 30;
 
 }
 
-.route-title{
+.route-title {
     @apply text-3xl font-semibold py-4
 }
 
 
 /**** bio data filter sidebar tab ***/
-.tab-root{
+.tab-root {
     border-bottom: 3px solid rgba(157, 157, 157, 0.38);
-    @apply  flex items-center gap-x-4 justify-between pb-2;
-    .tab{
+    @apply flex items-center gap-x-4 justify-between pb-2;
+    .tab {
         cursor: pointer;
         background: transparent;
         position: relative;
@@ -260,11 +265,13 @@ ul {
         font-size: 14px;
         color: rgba(51, 51, 51, 0.73);
         width: 100%;
-        &:nth-child(2){
+
+        &:nth-child(2) {
             text-align: end;
         }
-        &-active{
-            &:before{
+
+        &-active {
+            &:before {
                 content: "";
                 width: 100%;
                 height: 3px;
@@ -279,23 +286,21 @@ ul {
 }
 
 
-.loader-root{
+.loader-root {
     position: fixed;
     left: calc(50% + var(--sidebar-width) / 2);
     top: 40%;
     transform: translateX(-50%);
     z-index: 200;
 }
-.loader-center{
+
+.loader-center {
     left: 50% !important;
 }
 
 
-
-
-
 /*********** Pagination *************/
-.paginate-item{
+.paginate-item {
     @apply w-10 h-10 hover:bg-primary
     cursor-pointer transition
     transition-colors hover:text-white
@@ -306,21 +311,55 @@ ul {
     items-center select-none;
 }
 
-.paginate-item svg{
+.paginate-item svg {
     /*width: 7px;*/
 }
 
-.paginate-active{
+.paginate-active {
     @apply bg-primary font-semibold text-white
 }
 
-.accordion{
-    .accordion-item{
-        &.open-accordion{
+.accordion {
+    .accordion-item {
+        &.open-accordion {
             display: block;
         }
-        &.close-accordion{
+
+        &.close-accordion {
             display: none;
         }
+    }
+}
+
+
+/***** slicer ***** */
+.horizontal-slider {
+    position: relative;
+    width: 100%;
+    background: #c5c5c5;
+    height: 6px;
+    border-radius: 3px;
+
+    .slider-thumb {
+        min-width: 20px;
+        min-height: 20px;
+        border-radius: 10px;
+        background: #2c65ec;
+        display: flex;
+        font-size: 12px !important;
+        font-weight: 400;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        color: white;
+        top: -8px;
+    }
+
+    .slider-track {
+        //background: #8a8a8a;
+        width: 20px;
+        height: 20px;
+        display: block;
+
     }
 }

@@ -22,17 +22,6 @@ const BiodataFilterPage = () => {
     const dispatch   = useDispatch()
 
 
-    // async function handleSearchBioData(data) {
-    //     let filter = {}
-    //     if (data.biodataNo) {
-    //         filter.biodataNo = data.biodataNo
-    //         filter.pageNumber = 1
-    //     }
-    //     // trigger re-fetching with new filter payload
-    //     trigger(filter)
-    // }
-
-
     // re-fetch bio data whenever change those values....
     useEffect(()=>{
         let payload = {}
@@ -54,12 +43,17 @@ const BiodataFilterPage = () => {
         payload.pageNumber = pagination.currentPage
         payload.perPage = pagination.perPage
 
+        if(filter.ageRange && Array.isArray(filter.ageRange) && filter.ageRange.length === 2){
+            payload.ageRange = filter.ageRange
+        }
+
         if(sort.field){
             payload.sort = {
                 field: sort.field,
                 order: sort.order
             }
         }
+
 
         // trigger re-fetching with new filter payload
         trigger(payload)
@@ -74,6 +68,7 @@ const BiodataFilterPage = () => {
         filter.maritalStatus,
         filter.permanentAddress,
         filter.presentAddress,
+        filter.ageRange
     ])
 
 

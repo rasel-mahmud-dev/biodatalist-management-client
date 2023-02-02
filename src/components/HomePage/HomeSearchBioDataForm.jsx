@@ -43,7 +43,7 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
                     >
                         <option value="">Select</option>
                         {biodataOptions.biodataType.map(opt => (
-                            <option value={opt.value}>{opt.label}</option>
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
                     </Select>
                     <Select
@@ -53,7 +53,7 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
                     >
                         <option value="">Select</option>
                         {biodataOptions.maritalStatus.map(opt => (
-                            <option value={opt.value}>{opt.label}</option>
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
                     </Select>
 

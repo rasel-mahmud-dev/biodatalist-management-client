@@ -6,11 +6,14 @@ import Button from "components/Button";
 import {useForm} from "react-hook-form";
 import Input from "components/Input";
 import {changeFilter, clearFilter} from "../../store/slices/biodataSlice";
-import {FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp} from "react-icons/fa";
+import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 import Select from "components/Select";
 import biodataOptions from "../../data/biodataOptions";
 import Accordion from "components/Accordion";
 import {addressInput} from "components/Dashboard/EditBioDataStepFields";
+
+import ReactSlider from 'react-slider'
+
 
 const FilterBiodataSidebar = () => {
 
@@ -31,10 +34,15 @@ const FilterBiodataSidebar = () => {
         formState: {errors}
     } = useForm();
 
+    const [openAccordionIds, setOpenAccordionIds] = useState([1])
+
+    const [ageRange, setAgeRange] = useState([0, 90])
+
 
     const onSubmit = (data) => {
         dispatch(changeFilter({
             ...data,
+            ageRange,
             biodataNo: ""
         }))
     }
@@ -42,9 +50,14 @@ const FilterBiodataSidebar = () => {
     function handleClearFilterValue() {
         reset()
         dispatch(clearFilter())
+        setAgeRange([0, 90])
     }
 
-    const [openAccordionIds, setOpenAccordionIds] = useState([1])
+
+    function handleChangeAgeSlider(value) {
+        setAgeRange(value)
+    }
+
 
     function handleToggle(dataId) {
         if (openAccordionIds.includes(dataId)) {
@@ -58,6 +71,7 @@ const FilterBiodataSidebar = () => {
         return openAccordionIds.includes(id)
     }
 
+
     function renderFilterForm() {
         return (
             <div>
@@ -70,6 +84,8 @@ const FilterBiodataSidebar = () => {
                                 <h4 className="font-medium text-sm">Primary</h4>
                                 {isOpenExpandAccordion(1) ? <FaAngleUp/> : <FaAngleDown/>}
                             </div>
+
+                            {/***** accordion content *******/}
                             <div>
                                 <Select
                                     label="Biodata Type"
@@ -95,6 +111,21 @@ const FilterBiodataSidebar = () => {
                                         <option value={opt.value}>{opt.label}</option>
                                     ))}
                                 </Select>
+
+                                <div className="mt-10 input-group">
+                                    <label className="">Age</label>
+                                    <ReactSlider
+                                        value={ageRange}
+                                        onChange={handleChangeAgeSlider}
+                                        className="horizontal-slider mt-2"
+                                        thumbClassName="slider-thumb"
+                                        trackClassName="slider-track"
+                                        ariaValuetext={state => `Thumb value ${state.valueNow}`}
+                                        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+
+                                    />
+                                </div>
+
                             </div>
                         </Accordion.Item>
 
@@ -104,6 +135,8 @@ const FilterBiodataSidebar = () => {
                                 <h4 className="font-medium text-sm">Address</h4>
                                 {isOpenExpandAccordion(2) ? <FaAngleUp/> : <FaAngleDown/>}
                             </div>
+
+                            {/***** accordion content *******/}
                             <div>
                                 {/***** putting default values that store inside redux store ******/}
                                 {addressInput(errors, {
@@ -136,9 +169,6 @@ const FilterBiodataSidebar = () => {
                     ))}
                 </div>
 
-                {/**** clear all filter ****/}
-                <Button onClick={handleClearFilterValue} className="mt-4 block ml-auto">Clear Filter</Button>
-
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
 
                     {activeTab === 0 ? renderFilterForm() : (
@@ -151,7 +181,14 @@ const FilterBiodataSidebar = () => {
 
                         </div>
                     )}
-                    <Button className="my-20 mx-auto block">Search</Button>
+
+                    <div className="my-20">
+                        <Button className="mx-auto block">Search</Button>
+
+                        {/**** clear all filter ****/}
+                        {Object.keys(filter).length > 0 && <Button onClick={handleClearFilterValue} className="mt-4 block m-auto">Clear Filter</Button> }
+                    </div>
+
                 </form>
             </div>
         </Sidebar>
