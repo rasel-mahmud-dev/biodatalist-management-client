@@ -18,6 +18,7 @@ import {
 import {updateBiodataAction} from "../../store/actions/biodataAction";
 import Popup from "components/Popup";
 import {useRouter} from "next/router";
+import Loader from "components/Loader";
 
 
 const EditBiodata = () => {
@@ -30,6 +31,7 @@ const EditBiodata = () => {
     const dispatch = useDispatch()
 
     const [openCompletePopup, setOpenCompletePopup] = useState(false)
+    const [saveDataLoading, setSaveDataLoading] = useState(false)
 
 
 
@@ -95,6 +97,7 @@ const EditBiodata = () => {
 
     // save every step data in database
     function onSubmit(data) {
+        setSaveDataLoading(true)
         setStepBiodata(prevState => ({
             ...prevState,
             [activeStep]: data
@@ -117,7 +120,7 @@ const EditBiodata = () => {
                     return nextStep
                 }
             })
-        })
+        }).finally(()=> setSaveDataLoading(false))
     }
 
     function handleChangeStep(stepIndex) {
@@ -163,16 +166,14 @@ const EditBiodata = () => {
                 className="center-scale-popup w-full max-w-md py-7"
                 backdropClass="global-overlay"
                 isWithBackdrop={true}
-                onClose={()=>setOpenCompletePopup(false)}
+                onClose={()=>{setOpenCompletePopup(false); setActiveStep(0)}}
                 isOpen={openCompletePopup}
             >
                 <h1 className="route-title text-center">Wellcome!</h1>
                 <p className="text-center text-sm font-medium">Your biodata has been completed</p>
 
                 <Button className="mx-auto block mt-6" onClick={handleJumpMyBiodata}>See My Biodata</Button>
-
             </Popup>
-
         )
     }
 
@@ -181,10 +182,21 @@ const EditBiodata = () => {
         <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
             <h1 className="route-title">Edit Bio Data</h1>
 
+
+            {/***** save step data loading popup *****/}
+            <Popup
+                className="center-scale-popup w-full max-w-md py-7"
+                backdropClass="global-overlay"
+                isWithBackdrop={true}
+                onClose={()=>{ setSaveDataLoading(false) }}
+                isOpen={saveDataLoading}
+            >
+                <Loader className="loader-center !relative" titleClass="font-medium text-sm" title="Data is saving...!"  />
+            </Popup>
+
+
             <div className="max-w-3xl mx-auto ">
-
                 <div className="flex justify-center gap-x-10">
-
                     <StepBiodataSection
                         onChangeStep={handleChangeStep}
                         activeStep={activeStep}

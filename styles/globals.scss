@@ -198,6 +198,9 @@ ul {
         opacity: 1;
 
     }
+    &.auth-menu-popup{
+        min-width: 200px;
+    }
 }
 
 .center-scale-popup {

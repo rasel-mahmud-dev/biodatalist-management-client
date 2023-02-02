@@ -1,8 +1,8 @@
 import React from 'react';
 import {BiCheck} from "react-icons/bi";
 
-const StepBiodataSection = ({steps, onChangeStep, activeStep, completedSteps}) => {
 
+const StepBiodataSection = ({steps, onChangeStep, activeStep, completedSteps}) => {
 
     function handleJumpNextStep(stepIndex){
         if(completedSteps.includes(stepIndex.toString())){

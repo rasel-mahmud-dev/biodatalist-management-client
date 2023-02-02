@@ -91,16 +91,20 @@ const Navigation = () => {
                                      onMouseEnter={() => setOpenAuthPopup(true)}
                                      className="relative">
                                     <Avatar username={auth.username}  className="h-10 w-10" src={auth.avatar}/>
-                                    <Popup isOpen={openAuthPopup} className="right-0 shadow-xl">
-                                        <ul>
+                                    <Popup isOpen={openAuthPopup} className="right-0 shadow-xl auth-menu-popup">
+                                        <ul className="text-sm">
                                             <li className="flex items-center gap-x-2">
                                                 <Avatar username={auth.username} className="h-8 w-8"
                                                         src={auth.avatar}/>
                                                 <h4>{auth.username}</h4>
                                             </li>
-                                            <li className="flex items-center gap-x-2 mt-4 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
+                                            <li className="flex items-center gap-x-2 mt-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
                                                 <MdDashboard/>
                                                 <Link href={`/${auth.role === "ADMIN" ? "admin" : "user/dashboard"}`}>Dashboard</Link>
+                                            </li>
+                                            <li className="flex items-center gap-x-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
+                                                <MdDashboard/>
+                                                <Link href={`/user/mybio`}>My Bio</Link>
                                             </li>
                                             <li onClick={handleLogout}
                                                 className="flex items-center gap-x-2 hover:text-white hover:bg-primary transition transition-colors px-2 py-1 rounded cursor-pointer">
