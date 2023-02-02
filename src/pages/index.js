@@ -22,7 +22,7 @@ export default function Home() {
             <div className="h-20"></div>
 
             <section className="container">
-                <UserStatistics/>
+                <UserStatistics className="stats"/>
             </section>
 
             <section className="container pb-20">

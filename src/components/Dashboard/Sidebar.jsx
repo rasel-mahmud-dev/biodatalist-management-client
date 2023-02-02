@@ -51,7 +51,7 @@ const DashboardSidebar = ({isOpen}) => {
                 <div className="flex flex-col justify-center items-center py-10">
                     <Avatar className="w-24 h-24" imgClass="w-24 h-24 text-3xl" src={auth.avatar}
                             username={auth.username}/>
-                    <h2>{auth.username}</h2>
+                    <h2 className="font-medium text-sm">{auth.username}</h2>
 
                     <h3 className="mt-2  font-medium text-gray-500">Biodata Status</h3>
                     <div

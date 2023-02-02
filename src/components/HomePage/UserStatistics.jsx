@@ -1,7 +1,7 @@
 import React from 'react';
 import {useGetBiodataStatsQuery} from "../../store/services/bioDataApi";
 
-const UserStatistics = ({isShowTitle = true}) => {
+const UserStatistics = ({className="", isShowTitle = true}) => {
 
     let {data: stats = {}} = useGetBiodataStatsQuery()
 
@@ -13,7 +13,7 @@ const UserStatistics = ({isShowTitle = true}) => {
     }
 
     return (
-        <div className="mt-10">
+        <div className={`mt-10 ${className}`}>
             {isShowTitle && <h2 className="section-title text-center mt-24">User Statistics</h2> }
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">

@@ -35,7 +35,7 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
     return (
         <div className={`${className}`} {...attr}>
             <div className="shadow-lg rounded-xl bg-white p-5 my-20 ">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex items-center  w-full gap-x-10 pb-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-10 pb-5">
                     <Select
                         label="Biodata Type"
                         option={biodataOptions.biodataType}
@@ -58,12 +58,12 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
                     </Select>
 
                     <MultiStepSelect
-                        defaultOption={{name: "Select Present Address", value: ""}}
+                        defaultOption={{name: "Present Address", value: ""}}
                         label="Permanent Address"
                         register={register("permanentAddress")}
                     />
 
-                    <Button className="flex items-center gap-x-1 mt-8 ">
+                    <Button className="w-max flex items-center gap-x-1 mt-8 ">
                         <BiSearch />
                         Search
                     </Button>

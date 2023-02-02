@@ -221,17 +221,45 @@ ul {
 .banner {
     background: linear-gradient(136deg, #7b29ff, #140662);
     height: 700px;
-    width: 100%;
+    @apply text-center w-full;
     padding: 100px;
+
+    @include getDown(1000px){
+        height: 600px;
+        padding: 50px;
+    }
+    @include getDown(768px){
+        height: 500px;
+    }
 
     .banner-filter-form {
         bottom: -90%;
         position: relative;
-        width: 800px;
+        max-width: 800px;
+        min-width: 200px;
+        width: 100%;
         margin: auto;
+        .input-group{
+            text-align: start;
+        }
+        @include getDown(768px){
+            bottom: -70%;
+        }
+    }
+    .banner-title{
+        @apply text-center font-bold text-4xl lg:text-7xl text-white;
+        line-height: 1.2;
     }
 }
 
+.stats{
+    @include getDown(1000px){
+        padding-top: 60px;
+    }
+    @include getDown(768px){
+        padding-top: 80px;
+    }
+}
 
 .section-title {
     @apply text-4xl font-bold text-gray-900
