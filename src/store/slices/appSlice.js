@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 
 const initialState = {
-    isOpenSidebar: false
+    isOpenSidebar: false,
+    lang: "en"
 };
 
 export const appSlice = createSlice({
@@ -12,13 +13,23 @@ export const appSlice = createSlice({
         updateAccessToken(state, action) {
             state.accessToken = action.payload;
         },
-        toggleSidebar(state, action){
+        toggleSidebar(state) {
             state.isOpenSidebar = !state.isOpenSidebar
+        },
+        toggleLang(state, action) {
+            if (action.payload) {
+                state.lang = action.payload
+            } else {
+                let lang = state.lang === "en" ? "bn" : "en"
+                state.lang = lang
+                localStorage.setItem("lang", lang)
+            }
         }
     }
 });
 
+
 // Action creators are generated for each case reducer function
-export const { toggleSidebar } = appSlice.actions
+export const {toggleSidebar, toggleLang} = appSlice.actions
 
 export default appSlice.reducer

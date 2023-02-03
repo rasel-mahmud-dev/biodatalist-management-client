@@ -10,9 +10,10 @@ import {logoutAction} from "../store/slices/authSlice";
 import {toggleSidebar} from "../store/slices/appSlice";
 import ActiveLink from "components/ActiveLink";
 import {useRouter} from "next/router";
+import {toggleLang} from "../store/slices/appSlice"
 
 const Navigation = () => {
-    const {auth} = useSelector(state => state.authState)
+    const {authState: {auth}, appState: {lang}} = useSelector(state => state)
 
     const dispatch = useDispatch()
 
@@ -84,6 +85,7 @@ const Navigation = () => {
                 </nav>
                 <nav>
                     <ul className="flex items-center gap-x-4 py-2">
+                        <Button onClick={()=>dispatch(toggleLang())} variant="outline">{lang === "bn" ? "English" : lang === "en" ? "বাংলা": ""}</Button>
                         <li>
                             {auth ? (
                                 <div onClick={() => setOpenAuthPopup(!openAuthPopup)}

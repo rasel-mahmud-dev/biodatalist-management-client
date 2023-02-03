@@ -8,6 +8,7 @@ import {store} from "../store";
 import {useEffect} from "react";
 import {fetchCurrentAuthAction} from "../store/actions/authAction";
 import Footer from "components/Footer";
+import {toggleLang} from "../store/slices/appSlice";
 
 function App({Component, pageProps}) {
     return (
@@ -32,6 +33,9 @@ function AppWrapper(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCurrentAuthAction())
+
+        let lang = localStorage.getItem("lang") || "en"
+        dispatch(toggleLang(lang))
     }, [])
 
 

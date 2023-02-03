@@ -36,15 +36,23 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
     let steps = {
         1: {
             formLabel: "Select Country",
+            firstOption: "",
+            address: "country"
         },
         2: {
             formLabel: "Select Division",
+            firstOption: "All Division",
+            address: "division"
         },
         3: {
             formLabel: "Select District",
+            firstOption: "All District",
+            address: "district"
         },
         4: {
             formLabel: "Select Upazila",
+            firstOption: "All Upzila",
+            address: "upazila"
         }
     }
 
@@ -70,6 +78,8 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
 
     function getValue(updateState){
         let result = {}
+
+
         if (updateState.country && updateState.country.name) {
             result["country"] = updateState.country.name
         }
@@ -85,43 +95,45 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
         if (updateState.upazila && updateState.upazila.name) {
             result["upazila"] = updateState.upazila.name
         }
-
         return result
     }
 
-    function handleChange(value,) {
+    function handleChange(value) {
         setValue((prevState) => {
             let updateState = {...prevState}
-            if (currentStep === 1) {
-                updateState["country"] = value
-            } else if (currentStep === 2) {
-                updateState["division"] = value
-            } else if (currentStep === 3) {
-                updateState["district"] = value
-            } else if (currentStep === 4) {
-                updateState["upazila"] = value
-            }
-            // send update state back where this component used
-            console.log(getValue(updateState))
-            register.onChange({target: {name: name, value: getValue(updateState)}})
 
-            // fetch data for next step
-            handleFetchData(currentStep + 1, () => {
-            }, updateState)
+            // if select all types like all division, all upzila
+            if(!value){
+                updateState[steps[currentStep].address] = {name: "All " + steps[currentStep].address}
+                setExpandOption(false)
+
+            } else{
+                updateState[steps[currentStep].address] = value
+                // fetch data for next step
+                handleFetchData(currentStep + 1, () => {
+                }, updateState)
+
+                // progress next step
+                setCurrentStep((oldStep) => {
+                    if (currentStep >= 4) {
+                        setExpandOption(false)
+                        return 1
+                    } else {
+                        return oldStep + 1
+                    }
+                })
+            }
+
+            console.log(getValue(updateState))
+
+            // send update state back where this component used
+            register.onChange({target: {name: name, value: getValue(updateState)}})
 
             // set selected data
             return updateState;
         })
 
-        // progress next step
-        setCurrentStep((oldStep) => {
-            if (currentStep >= 4) {
-                setExpandOption(false)
-                return 1
-            } else {
-                return oldStep + 1
-            }
-        })
+
     }
 
     function handleFetchData(currentStep, next, updateState) {
@@ -191,7 +203,6 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
                         str += " => " + value[valueKey]
                     }
                 }
-
             } else{
                 // string all addresses concatenate
                 if (value[valueKey] && value[valueKey].name) {
@@ -216,16 +227,25 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
                 <div className="custom-options p-4">
                     <div
                         className={`flex items-center justify-between border-b py-2 border-primary/30 ${currentStep !== 1 ? "flex-row-reverse" : ""}`}>
-                        <h3 className="font-medium">{steps[currentStep].formLabel}</h3>
+                        <h3 className="font-medium whitespace-nowrap">{steps[currentStep].formLabel}</h3>
                         {currentStep !== 1 ? <FaAngleLeft onClick={handleJumpPreviousStep}/> :
                             <FaTimes className="text-sm" onClick={toggleExpandOption}/>}
                     </div>
 
                     <div className="mt-5 options-list">
+
+                        {/******** all first addresses ********/}
+                        {steps[currentStep] && steps[currentStep].firstOption && (
+                            <li onClick={() => handleChange()}
+                                className="flex items-center justify-between text-sm py-2 list-none hover:bg-primary/10 cursor-pointer px-2 rounded">
+                                <span>{steps[currentStep].firstOption}</span>
+                            </li>
+                        )}
+
                         {options[currentStep]?.map((item, i) => (
                             <li onClick={() => handleChange(item)} key={i}
                                 className="flex items-center justify-between text-sm py-2 list-none hover:bg-primary/10 cursor-pointer px-2 rounded">
-                                <span>{item.name}</span>
+                                <span className="">{item.name}</span>
                                 <FaAngleRight className="text-gray-500"/>
                             </li>
                         ))}
