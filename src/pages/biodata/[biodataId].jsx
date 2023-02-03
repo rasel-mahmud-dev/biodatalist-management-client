@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import BiodateDetail from "components/BiodataDetail";
 import {useFetchBiodataDetailQuery} from "../../store/services/bioDataApi";
 import {useRouter} from "next/router";
 import Backdrop from "components/Backdrop";
 import Loader from "components/Loader";
 import Avatar from "components/Avatar";
-import Link from "next/link";
-import Button from "components/Button";
 import ErrorMessage from "components/ErrorMessage";
 import getErrorMessage from "../../utils/getErrorMessage";
 
@@ -18,7 +16,6 @@ const BiodataDetaiilPage = () => {
 
     let {data, isLoading, isFetching, error} = useFetchBiodataDetailQuery(biodataId)
 
-    console.log(error)
 
     return (
         <div className="container">

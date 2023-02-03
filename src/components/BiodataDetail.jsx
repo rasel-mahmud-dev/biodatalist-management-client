@@ -51,6 +51,14 @@ const BiodateDetail = ({biodata}) => {
         return str.slice(1)
     }
 
+    function renderDate(dateString){
+        if(dateString){
+            let date = new Date(dateString)
+            return date.toDateString()
+        }
+        return "Missing birthday"
+    }
+
     return (
         <div>
             {Object.keys(bioGroup).map(bioSectionName => (
@@ -61,8 +69,11 @@ const BiodateDetail = ({biodata}) => {
                             <div className="flex text-sm my-1">
                                 <span className="font-medium block w-52">{bioName}</span>
                                 <span
-                                    className="text-gray-800">{typeof bioGroup[bioSectionName][bioName] === "string"
-                                    ? bioGroup[bioSectionName][bioName]
+                                    className="text-gray-800">{
+                                    typeof bioGroup[bioSectionName][bioName] === "string"
+                                    ? bioName === "birthDay"
+                                            ? renderDate(bioGroup[bioSectionName][bioName])
+                                            : bioGroup[bioSectionName][bioName]
                                     : renderAddress(bioGroup[bioSectionName][bioName])
                                 }</span>
                             </div>

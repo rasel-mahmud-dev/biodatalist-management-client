@@ -34,7 +34,7 @@ const HomeSearchBioDataForm = ({isOpen, className, children, ...attr}) => {
         <div className={`${className}`} {...attr}>
             <div className="shadow-lg rounded-xl bg-white p-5 my-20 ">
                 <form onSubmit={handleSubmit(onSubmit)}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-10 pb-5">
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-2 pb-5">
                     <Select
                         label="Biodata Type"
                         option={biodataOptions.biodataType}

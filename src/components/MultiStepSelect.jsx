@@ -124,7 +124,15 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
                 })
             }
 
-            console.log(getValue(updateState))
+            // if select all division
+            if(updateState.division && updateState.division.name === "All division"){
+                updateState.district = undefined
+                updateState.upazila = undefined
+            }
+
+            if(updateState.district && updateState.district.name === "All district"){
+                updateState.upazila = undefined
+            }
 
             // send update state back where this component used
             register.onChange({target: {name: name, value: getValue(updateState)}})
