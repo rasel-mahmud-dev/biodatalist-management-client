@@ -132,8 +132,6 @@ const MultiStepSelect = ({error, label,  name, defaultValue, defaultOption, regi
             // set selected data
             return updateState;
         })
-
-
     }
 
     function handleFetchData(currentStep, next, updateState) {

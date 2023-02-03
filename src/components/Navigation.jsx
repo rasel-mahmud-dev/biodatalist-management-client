@@ -85,7 +85,7 @@ const Navigation = () => {
                 </nav>
                 <nav>
                     <ul className="flex items-center gap-x-4 py-2">
-                        <Button onClick={()=>dispatch(toggleLang())} variant="outline">{lang === "bn" ? "English" : lang === "en" ? "বাংলা": ""}</Button>
+                        <Button onClick={()=>dispatch(toggleLang())} variant="outline">{lang === "en" ? "English" : lang === "bn" ? "বাংলা": ""}</Button>
                         <li>
                             {auth ? (
                                 <div onClick={() => setOpenAuthPopup(!openAuthPopup)}

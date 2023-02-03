@@ -34,6 +34,7 @@ apis.interceptors.response.use(function (config) {
 // axios interceptors
 apis.interceptors.request.use(function (config) {
     config.headers["authorization"] = window.localStorage.getItem("token")
+    config.headers["lng"] = window.localStorage.getItem("lang")
 
     return config;
 }, function (error) {
