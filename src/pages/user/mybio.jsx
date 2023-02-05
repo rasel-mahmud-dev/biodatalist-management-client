@@ -1,18 +1,19 @@
 import React from 'react';
-import DashboardLayout from "../../Layout/Dashboard";
+import DashboardLayout from "../../layout/Dashboard";
 import {useSelector} from "react-redux";
 import Button from "components/Button";
 import ErrorMessage from "components/ErrorMessage";
 import Link from "next/link";
 import BiodateDetail from "components/BiodataDetail";
+import withAuth from "../../hoc/withAuth";
 
-const Dashboard = () => {
+const MyBio = () => {
 
     const authState = useSelector(state => state.authState)
 
 
     return (
-        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
+        <DashboardLayout>
 
             <h1 className="route-title">My Bio Data</h1>
 
@@ -40,4 +41,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default withAuth(["ADMIN", "CUSTOMER"])(MyBio);

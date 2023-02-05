@@ -1,12 +1,12 @@
 import React from 'react';
-import DashboardLayout from "../../Layout/Dashboard";
+import DashboardLayout from "../../layout/Dashboard";
 import UserStatistics from "components/HomePage/UserStatistics";
+import withAuth from "../../hoc/withAuth";
 
 const Dashboard = () => {
     return (
 
-        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
-
+        <DashboardLayout>
             <h1 className="route-title">User Dashboard</h1>
             <UserStatistics isShowTitle={false} />
 
@@ -16,4 +16,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default withAuth(["ADMIN", "CUSTOMER"])(Dashboard);

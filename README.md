@@ -8,6 +8,11 @@
 
 ## Requirement 
 
+### Summary
+This is a biodata management services, here user can find peoples for their marriage, 
+User can put their public bio data.
+Also They can filter people bio data via lot of biodata attribute
+
 ### Features 
 - User can filter biodata
 - Login / Registration also User can login with Google Account

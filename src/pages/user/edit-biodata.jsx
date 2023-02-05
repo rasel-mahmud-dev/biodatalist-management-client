@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import DashboardLayout from "../../Layout/Dashboard";
+import DashboardLayout from "../../layout/Dashboard";
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import Button from "components/Button";
@@ -20,6 +20,7 @@ import Popup from "components/Popup";
 import {useRouter} from "next/router";
 import Loader from "components/Loader";
 import HttpLoadingPopup from "components/HttpLoadingPopup";
+import withAuth from "../../hoc/withAuth";
 
 
 const EditBiodata = () => {
@@ -80,7 +81,6 @@ const EditBiodata = () => {
     function makeBioDataToStepGroup() {
         let updateBiodataDefault = {}
 
-
         Object.keys(steps).forEach((key, index) => {
             let stepNames = steps[key]
             updateBiodataDefault[index] = {}
@@ -109,7 +109,7 @@ const EditBiodata = () => {
 
     // save every step data in database
     function onSubmit(data) {
-        setSaveDataLoading(true)
+        // setSaveDataLoading(true)
         setStepBiodata(prevState => ({
             ...prevState,
             [activeStep]: data
@@ -120,19 +120,34 @@ const EditBiodata = () => {
             data.isCompleted = true
         }
 
+        // console.log(data)
+
+
+        setActiveStep(prevState => {
+            let nextStep = prevState + 1
+            if(nextStep === 7){
+                // if last step completed then open popup modal
+                setOpenCompletePopup(true)
+            }else {
+                setOpenCompletePopup(false)
+                return nextStep
+            }
+        })
+        
+
         // dispatch action
-        dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
-            setActiveStep(prevState => {
-                let nextStep = prevState + 1
-                if(nextStep === 7){
-                    // if last step completed then open popup modal
-                    setOpenCompletePopup(true)
-                }else {
-                    setOpenCompletePopup(false)
-                    return nextStep
-                }
-            })
-        }).finally(()=> setSaveDataLoading(false))
+        // dispatch(updateBiodataAction(data)).unwrap().then((doc) => {
+        //     setActiveStep(prevState => {
+        //         let nextStep = prevState + 1
+        //         if(nextStep === 7){
+        //             // if last step completed then open popup modal
+        //             setOpenCompletePopup(true)
+        //         }else {
+        //             setOpenCompletePopup(false)
+        //             return nextStep
+        //         }
+        //     })
+        // }).finally(()=> setSaveDataLoading(false))
     }
 
     function handleChangeStep(stepIndex) {
@@ -190,7 +205,7 @@ const EditBiodata = () => {
     }
 
     return (
-        <DashboardLayout roles={["ADMIN", "CUSTOMER"]}>
+        <DashboardLayout>
             <h1 className="route-title">Edit Bio Data</h1>
 
 
@@ -235,4 +250,4 @@ const EditBiodata = () => {
     );
 };
 
-export default EditBiodata;
+export default withAuth(["ADMIN", "CUSTOMER"])(EditBiodata);

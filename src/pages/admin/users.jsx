@@ -1,14 +1,15 @@
 import React from 'react';
 import {useGetUsersQuery} from "../../store/services/usersApi";
-import DashboardLayout from "../../Layout/Dashboard";
+import DashboardLayout from "../../layout/Dashboard";
 import Avatar from "components/Avatar";
+import withAuth from "../../hoc/withAuth";
 
 const Users = () => {
 
     const {data: users} = useGetUsersQuery()
 
     return (
-        <DashboardLayout roles={["ADMIN"]}>
+        <DashboardLayout>
 
             <h1 className="route-title">Users List</h1>
 
@@ -27,4 +28,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default withAuth(["ADMIN"])(Users);

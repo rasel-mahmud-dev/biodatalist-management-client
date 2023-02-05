@@ -26,17 +26,18 @@ const BiodataDetaiilPage = () => {
                 <Backdrop className="!#6666664d"/>
             </div> : error && <ErrorMessage message={getErrorMessage(error)}/>}
 
-            {data && (<div>
+            {data && (
+                <div>
+                    <div className="flex flex-col justify-center items-center py-10">
+                        <Avatar className="w-24 h-24" imgClass="w-24 h-24 text-3xl" src={data?.user.avatar}
+                                username={data?.user.username}/>
+                        <h2 className="font-medium text-sm mt-3">{data?.user.email}</h2>
+                        <h2 className="font-bold text-2xl">{data?.user.username}</h2>
+                    </div>
 
-                <div className="flex flex-col justify-center items-center py-10">
-                    <Avatar className="w-24 h-24" imgClass="w-24 h-24 text-3xl" src={data?.user.avatar}
-                            username={data?.user.username}/>
-                    <h2 className="font-medium text-sm mt-3">{data?.user.email}</h2>
-                    <h2 className="font-bold text-2xl">{data?.user.username}</h2>
+                    <BiodateDetail biodata={data}/>
                 </div>
-
-                <BiodateDetail biodata={data}/>
-            </div>)}
+            )}
         </div>
     );
 };
